@@ -278,3 +278,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  console.log('Página de noivas carregada com sucesso! 👰✨');
+});
+
+
