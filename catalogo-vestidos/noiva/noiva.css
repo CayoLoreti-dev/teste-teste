@@ -757,7 +757,7 @@ hr {
     }
 }
 
-@media (max-width: 950px) {
+@media (max-width: 1100px) {
     .pix {
         font-size: 0.9rem;
         padding: 6px 0;
