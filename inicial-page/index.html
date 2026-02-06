@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>SSISSI - Ternos e Vestidos</title>
+</head>
+<body>
+<header class="topo">
+    <div class="pix">
+        <p>Pagamento em pix 10% de desconto</p>
+    </div>
+    <hr>
+    <div class="navbar">
+        <div class="logo"></div>
+
+        <div class="titulo">
+            <p class="cursor typewriter-animation">Bem-Vinda(o)</p>
+        </div>
+
+        <div class="actions">
+            <div class="action-item">
+                <span><img src="./items/Vector.png" alt="Atendimento"></span>
+                <p>Atendimento</p>
+            </div>
+
+            <div class="action-item">
+                <span><img src="./items/Vector (1).png" alt="Minha Conta"></span>
+                <p>Minha Conta</p>
+            </div>
+
+            <div class="action-item">
+                <span><img src="./items/Vector (2).png" alt="Meu Carrinho"></span>
+                <p>Meu Carrinho</p>
+            </div>
+        </div>
+    </div>
+    <hr>
+</header>
+
+<nav>
+    <div class="navegacao">
+        <ul>
+            <a href="./index.html"><span>Inicio</span></a>
+            <span class="nav-link">Catálogo</span>
+            <span class="nav-link">Contato</span>
+            <span class="nav-link">Quem Somos</span>
+            <span class="nav-link">Trocas e Devoluções</span>
+            <span class="nav-link">Envios e Prazos</span>
+            <span class="nav-link">Perguntas Frequentes</span>
+        </ul>
+    </div>
+    <hr>
+</nav>
+
+<main>
+    <div class="video-fundo">
+        <video autoplay muted loop playsinline>
+            <source src="./videos/1 (1).mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div class="imagens-noiva">
+        <div class="imagens-noiva-1">
+            <img src="../img noivas/Captura de tela 2026-01-28 153613.png" alt="Vestido de noiva elegante">
+        </div>
+        <div class="imagens-noiva-2">
+            <img src="../img noivas/Captura de tela 2026-01-28 153820.png" alt="Vestido de noiva sofisticado">
+        </div>
+        <div class="imagens-noiva-3">
+            <img src="../img noivas/Captura de tela 2026-01-28 153802.png" alt="Vestido de noiva clássico">
+        </div>
+    </div>
+
+    <div class="texto-noiva">
+        <ul>
+            <li class="card-categoria">
+                <a href="../catalogo-vestidos/noiva/catalogo-noiva.html">
+                    <div class="card-icon">👰</div>
+                    <p class="card-titulo">Vai Casar?</p>
+                    <p class="card-descricao">Conheça nossos modelos mais desejados para o dia especial</p>
+                </a>
+            </li>
+
+            <li class="card-categoria">
+                <div class="card-icon">✨</div>
+                <p class="card-titulo">Vai se Formar?</p>
+                <p class="card-descricao">Vestidos deslumbrantes para sua formatura</p>
+            </li>
+
+            <li class="card-categoria">
+                <div class="card-icon">💕</div>
+                <p class="card-titulo">Madrinhas</p>
+                <p class="card-descricao">Modelos exclusivos para madrinhas de casamento</p>
+            </li>
+        </ul>
+    </div>
+</main>
+
+<!-- Modal para notificações -->
+<div class="modal-notificacao" id="modalNotificacao">
+    <div class="modal-content-notif">
+        <span class="modal-close-notif">&times;</span>
+        <p id="mensagemNotificacao">Em breve!</p>
+    </div>
+</div>
+
+<script src="script.js" defer></script>
+</body>
+</html>

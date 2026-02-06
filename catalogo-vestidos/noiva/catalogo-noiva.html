@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="noiva.css"> 
+    <title>Catálogo Noivas - SSISSI</title>
+</head>
+<body>
+
+<header class="topo">
+    <div class="pix">
+        <p>Pagamento em pix 10% de desconto</p>
+    </div>
+    <hr>
+    
+    <div class="navbar">
+        <div class="logo"></div>
+
+        <div class="titulo">
+            <p class="cursor typewriter-animation">Noivas</p>
+        </div>
+
+        <div class="actions">
+            <div class="action-item">
+                <span><img src="../../inicial-page/items/Vector.png" alt="Atendimento"></span>
+                <p>Atendimento</p>
+            </div>
+            <div class="action-item">
+                <span><img src="../../inicial-page/items/Vector (1).png" alt="Minha Conta"></span>
+                <p>Minha Conta</p>
+            </div>
+            <div class="action-item">
+                <span><img src="../../inicial-page/items/Vector (2).png" alt="Meu Carrinho"></span>
+                <p>Meu Carrinho</p>
+            </div>
+        </div>
+    </div>
+    <hr>
+</header>
+
+<nav>
+    <div class="navegacao">
+        <ul>
+            <a href="../../inicial-page/index.html"><span>Inicio</span></a>
+            <span>Catálogo</span>
+            <span>Contato</span>
+            <span>Quem Somos</span>
+            <span>Trocas e Devoluções</span>
+            <span>Envios e Prazos</span>
+            <span>Perguntas Frequentes</span>
+        </ul>g
+    </div>
+    <hr>
+</nav>
+
+<main>
+    <div class="vestidos">
+
+    <div class="vestido-1">
+        <img src="https://centernoivas.com.br/wp-content/uploads/2025/04/TE003-FRENTE.jpg" alt="Vestido de noiva 1">
+    </div>
+
+    <div class="vestido-2">
+        <img src="https://marthamedeiros.com.br/cdn/shop/files/Copia-de-M_Medeiros_maio2024-22.jpg?v=1726152017&width=1000" alt="Vestido de noiva 2">
+    </div>
+
+    <div class="vestido-3">
+        <img src="https://casamarela.com/wp-content/uploads/2024/03/8W13_POLONIA_LUNA_NOVIAS_2.jpg
+" alt="Vestido de noiva 3">
+    </div>
+
+    <div class="vestido-4">
+    <img src="https://cdn.awsli.com.br/2500x2500/2137/2137091/produto/226795913/vestido-de-noiva-raridade-premium-em-renda-e-tule-poa-b8741fa8-j7pifrpnx7.jpg" alt="Vestido de noiva 4">
+    </div>
+    </div>
+
+    <!-- Carrossel de Imagens -->
+    <section class="carrossel-container">
+        <h2 class="carrossel-titulo">Mais Vestidos</h2>
+        <div class="carrossel-wrapper">
+            <button class="carrossel-btn carrossel-btn-prev" aria-label="Anterior">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 19l-7-7 7-7"></path>
+                </svg>
+            </button>
+
+            <div class="carrossel">
+                <img src="https://www.noivasdoriodejaneiro.com.br/wp-content/uploads/2021/12/0430.webp" alt="Vestido de noiva">
+                <img src="https://www.noivasdoriodejaneiro.com.br/wp-content/uploads/2023/11/1187-4.jpg" alt="Vestido de noiva">
+                <img src="https://www.noivasdoriodejaneiro.com.br/wp-content/uploads/2024/11/0431-3.webp" alt="Vestido de noiva">
+                <img src="https://www.noivasdoriodejaneiro.com.br/wp-content/uploads/2025/02/1239-1.jpg" alt="Vestido de noiva">
+                <img src="https://www.noivasdoriodejaneiro.com.br/wp-content/uploads/2025/02/0423-5.webp" alt="Vestido de noiva">
+                <img src="https://www.noivasdoriodejaneiro.com.br/wp-content/uploads/2021/08/0308-11.jpg" alt="Vestido de noiva">
+                <img src="https://www.noivasdoriodejaneiro.com.br/wp-content/uploads/2025/02/1274-8-scaled.jpg" alt="Vestido de noiva">
+                <img src="https://www.noivasdoriodejaneiro.com.br/wp-content/uploads/2025/02/0449-4.jpg" alt="Vestido de noiva">
+                <img src="https://www.noivasdoriodejaneiro.com.br/wp-content/uploads/2023/12/0312.jpg" alt="Vestido de noiva">
+                <img src="https://www.noivasdoriodejaneiro.com.br/wp-content/uploads/2016/01/0411.jpg" alt="Vestido de noiva">
+                <img src="https://www.noivasdoriodejaneiro.com.br/wp-content/uploads/2025/02/1270-8-scaled.jpg" alt="Vestido de noiva">
+            </div>
+
+            <button class="carrossel-btn carrossel-btn-next" aria-label="Próximo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 5l7 7-7 7"></path>
+                </svg>
+            </button>
+        </div>
+    </section>
+</main>
+
+<!-- Modal para visualizar imagem em fullscreen -->
+<div class="modal" id="imagemModal">
+    <span class="modal-close">&times;</span>
+    <img class="modal-content" id="imagemModal-img" src="" alt="">
+</div>
+
+        <!-- Script que aplica delays dinâmicos às imagens da galeria -->
+        <script src="noiva.js" defer></script>
+
+    </body>
+</html>

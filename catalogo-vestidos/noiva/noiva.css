@@ -1,0 +1,927 @@
+/* 1. CONFIGURAÇÕES GERAIS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: inherit;
+}
+
+body {
+    background: linear-gradient(135deg, #faf8f3 0%, #f4ede2 50%, #faf8f3 100%);
+    box-shadow: inset 0 0 100px rgba(119, 51, 59, 0.06);
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* 2. CABEÇALHO (BARRA PIX) */
+.pix {
+    background: linear-gradient(90deg, #f8f4ed 0%, #f9f6f0 50%, #f8f4ed 100%);
+    color: #77333b;
+    text-align: center;
+    letter-spacing: 3px;
+    font-size: 0.95rem;
+    padding: 8px 0;
+    font-weight: 500;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(90deg, transparent, #e6be8a 20%, #e6be8a 80%, transparent);
+    box-shadow: 0 0 12px rgba(230, 190, 138, 0.25);
+    margin: 0;
+    opacity: 0.7;
+}
+
+/* 3. NAVBAR E ANIMAÇÃO */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(180deg, rgba(248,244,237,0.95) 0%, rgba(250,248,243,0.98) 100%);
+    padding: 12px 40px;
+    position: relative;
+    min-height: 72px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 2px 16px rgba(119, 51, 59, 0.05);
+}
+
+.titulo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+}
+
+.cursor {
+    font-size: 3.2rem;
+    color: #77333b;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid #77333b;
+    width: 12ch;
+    margin: 0 auto;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+.typewriter-animation {
+    animation: 
+      typewriter 2.5s steps(15) 0.5s 1 normal both,
+      blinkingCursor 500ms steps(15) infinite normal;
+}
+
+@keyframes typewriter { from { width: 0; } to { width: 100%; } }
+@keyframes blinkingCursor { from { border-right-color: #77333b; } to { border-right-color: transparent; } }
+
+/* 4. ITENS DA DIREITA (ACTIONS) */
+.actions {
+    display: flex;
+    gap: 35px;
+    margin-left: auto;
+}
+
+.action-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    min-width: 85px;
+    transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
+    position: relative;
+}
+
+.action-item::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #e6be8a, transparent);
+    transition: width 0.3s ease;
+}
+
+.action-item:hover::after {
+    width: 100%;
+}
+
+.action-item:hover {
+    transform: translateY(-4px);
+}
+
+.action-item img {
+    height: 26px;
+    width: auto;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 2px 4px rgba(119, 51, 59, 0.1));
+}
+
+.action-item:hover img {
+    transform: scale(1.15);
+    filter: drop-shadow(0 4px 12px rgba(119, 51, 59, 0.2));
+}
+
+.action-item p {
+    font-size: 12px;
+    font-family: 'Montserrat', sans-serif;
+    color: #77333b;
+    margin-top: 6px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* 5. NAVEGAÇÃO */
+.navegacao ul {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+    justify-content: center;
+    padding: 1.2rem 0;
+    background: linear-gradient(135deg, rgba(248,244,237,0.98) 0%, rgba(250,248,243,0.96) 100%);
+}
+
+.navegacao ul span {
+    cursor: pointer;
+    font-family: 'Cormorant Garamond', serif;
+    color: #77333b;
+    letter-spacing: 1.5px;
+    font-size: 1rem;
+    text-decoration: none;
+    position: relative;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.navegacao ul span::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #e6be8a, transparent);
+    transform: translateX(-50%);
+    transition: width 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+.navegacao ul span:hover::after {
+    width: 80%;
+}
+
+.navegacao ul span:hover {
+    color: #c6956b;
+}
+
+/* 6. GALERIA DE VESTIDOS - layout, estilo e animação */
+.vestidos {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    padding: 3rem 2rem;
+    background: linear-gradient(135deg, rgba(230,190,138,0.08) 0%, rgba(119,51,59,0.04) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.vestidos::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(230, 190, 138, 0.1), transparent);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: float 15s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(30px); }
+}
+
+.vestidos img {
+    width: 340px;
+    height: 480px;
+    max-width: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 16px;
+    box-shadow: 0 15px 48px rgba(119,51,59,0.15), 0 0 60px rgba(230,190,138,0.2);
+    transform: translateY(100px);
+    opacity: 0;
+    will-change: transform, opacity;
+    animation: slideUp 1.2s cubic-bezier(.2,.9,.3,1) forwards;
+    animation-delay: var(--delay, 0s);
+    animation-play-state: paused;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    transition: all 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+.vestidos.play img { animation-play-state: running; }
+
+@keyframes slideUp {
+    from { transform: translateY(80px); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+}
+
+.vestidos img:hover {
+    transform: translateY(-12px) scale(1.04);
+    box-shadow: 0 25px 60px rgba(119,51,59,0.22), 0 0 80px rgba(230,190,138,0.3);
+}
+
+@media (max-width: 980px){
+    .vestidos img { width: 280px; height: 400px; }
+}
+
+@media (max-width: 640px){
+    .vestidos { gap: 12px; padding: 2rem 1rem; }
+    .vestidos img { width: calc(50% - 12px); height: auto; aspect-ratio: 3/4; }
+}
+
+/* 7. CARROSSEL DINÂMICO */
+.carrossel-container {
+    width: 100%;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, rgba(230,190,138,0.06) 0%, rgba(119,51,59,0.03) 100%);
+    opacity: 0;
+    transform: translateY(40px);
+    animation: fadeInUp 0.8s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+    position: relative;
+    overflow: hidden;
+}
+
+.carrossel-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #e6be8a, transparent);
+    animation: slideRight 3s ease-in-out infinite;
+}
+
+@keyframes slideRight {
+    0% { left: -100%; }
+    50% { left: 50%; }
+    100% { left: 100%; }
+}
+
+.carrossel-container.visible {
+    animation-play-state: running;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.carrossel-titulo {
+    text-align: center;
+    color: #77333b;
+    font-size: 2.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    margin-bottom: 2.5rem;
+    letter-spacing: 2px;
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+}
+
+.carrossel-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    z-index: 2;
+}
+
+.carrossel {
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 1.5rem 0;
+    flex: 1;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+.carrossel::-webkit-scrollbar {
+    height: 8px;
+}
+
+.carrossel::-webkit-scrollbar-track {
+    background: rgba(119, 51, 59, 0.06);
+    border-radius: 10px;
+}
+
+.carrossel::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #e6be8a 0%, #d9a85c 100%);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 8px rgba(230, 190, 138, 0.3);
+}
+
+.carrossel::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #d9a85c 0%, #c6956b 100%);
+    box-shadow: 0 0 12px rgba(230, 190, 138, 0.5);
+}
+
+.carrossel img {
+    flex: 0 0 320px;
+    height: 420px;
+    object-fit: cover;
+    border-radius: 14px;
+    box-shadow: 0 12px 40px rgba(119, 51, 59, 0.14);
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.2, 0.9, 0.3, 1);
+    scroll-snap-align: center;
+    position: relative;
+}
+
+.carrossel img::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(230, 190, 138, 0);
+    border-radius: 14px;
+    transition: background 0.3s ease;
+    z-index: 1;
+}
+
+.carrossel img:hover::before {
+    background: rgba(230, 190, 138, 0.15);
+}
+
+.carrossel img:hover {
+    transform: scale(1.08) translateY(-8px);
+    box-shadow: 0 20px 60px rgba(119, 51, 59, 0.25), 0 0 80px rgba(230, 190, 138, 0.3);
+}
+
+.carrossel img:active {
+    cursor: grabbing;
+}
+
+/* Botões de navegação */
+.carrossel-btn {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    border: 2.5px solid #e6be8a;
+    background: linear-gradient(135deg, #fff 0%, #faf8f3 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #77333b;
+    transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
+    box-shadow: 0 4px 16px rgba(119, 51, 59, 0.08);
+    position: relative;
+}
+
+.carrossel-btn::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(230, 190, 138, 0.2), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.carrossel-btn:hover {
+    background: linear-gradient(135deg, #77333b 0%, #5a2533 100%);
+    color: #f8f4ed;
+    border-color: #77333b;
+    transform: scale(1.12);
+    box-shadow: 0 8px 36px rgba(119, 51, 59, 0.25);
+}
+
+.carrossel-btn:hover::before {
+    opacity: 1;
+}
+
+.carrossel-btn:active {
+    transform: scale(0.98);
+}
+
+.carrossel-btn svg {
+    width: 22px;
+    height: 22px;
+    transition: transform 0.2s ease;
+}
+
+.carrossel-btn:hover svg {
+    transform: scale(1.15);
+}
+
+/* 8. MODAL PARA VISUALIZAÇÃO EM FULLSCREEN */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(3px);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    max-width: 85vw;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 20px;
+    box-shadow: 0 20px 100px rgba(0, 0, 0, 0.5);
+    animation: zoomIn 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.modal-close {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.modal-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg) scale(1.1);
+}
+
+/* Responsividade */
+@media (max-width: 1200px) {
+    .vestidos {
+        gap: 15px;
+        padding: 2.5rem 1.5rem;
+    }
+
+    .vestidos img {
+        width: 300px;
+        height: 420px;
+    }
+
+    .carrossel-container {
+        padding: 3rem 1.5rem;
+    }
+
+    .carrossel-wrapper {
+        gap: 1.2rem;
+        padding: 0 1.5rem;
+    }
+
+    .carrossel {
+        gap: 1.8rem;
+    }
+
+    .carrossel img {
+        flex: 0 0 290px;
+        height: 380px;
+    }
+
+    .carrossel-btn {
+        width: 46px;
+        height: 46px;
+    }
+
+    .carrossel-titulo {
+        font-size: 2.2rem;
+        margin-bottom: 2.2rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .navbar {
+        padding: 10px 25px;
+        min-height: 65px;
+    }
+
+    .cursor {
+        font-size: 2.5rem;
+    }
+
+    .actions {
+        gap: 20px;
+    }
+
+    .vestidos {
+        gap: 15px;
+        padding: 2.5rem 1.5rem;
+    }
+
+    .vestidos img {
+        width: 280px;
+        height: 400px;
+    }
+
+    .carrossel-container {
+        padding: 3rem 1.5rem;
+    }
+
+    .carrossel-wrapper {
+        max-width: 1100px;
+        gap: 1rem;
+    }
+
+    .carrossel {
+        gap: 1.5rem;
+    }
+
+    .carrossel img {
+        flex: 0 0 270px;
+        height: 360px;
+    }
+
+    .carrossel-btn {
+        width: 44px;
+        height: 44px;
+    }
+
+    .carrossel-titulo {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .pix {
+        font-size: 0.9rem;
+        padding: 6px 0;
+    }
+
+    .navbar {
+        padding: 8px 15px;
+        min-height: 60px;
+    }
+
+    .cursor {
+        font-size: 1.8rem;
+        width: 9ch;
+    }
+
+    .actions {
+        gap: 15px;
+    }
+
+    .action-item {
+        min-width: 65px;
+    }
+
+    .action-item img {
+        height: 22px;
+    }
+
+    .action-item p {
+        font-size: 11px;
+        margin-top: 4px;
+    }
+
+    .navegacao ul {
+        gap: 1.5rem;
+        padding: 0.8rem 0;
+    }
+
+    .navegacao ul span {
+        font-size: 0.85rem;
+        letter-spacing: 1px;
+    }
+
+    .vestidos {
+        gap: 12px;
+        padding: 2rem 1rem;
+    }
+
+    .vestidos img {
+        width: 240px;
+        height: 340px;
+    }
+
+    .carrossel-wrapper {
+        gap: 1rem;
+        padding: 0 1rem;
+    }
+
+    .carrossel {
+        gap: 1.2rem;
+    }
+
+    .carrossel img {
+        flex: 0 0 220px;
+        height: 300px;
+    }
+
+    .carrossel-btn {
+        width: 40px;
+        height: 40px;
+    }
+
+    .carrossel-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .carrossel-titulo {
+        font-size: 1.6rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .carrossel-container {
+        padding: 2.5rem 1rem;
+    }
+
+    .modal-close {
+        top: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 30px;
+    }
+
+    .modal-content {
+        max-width: 90vw;
+        max-height: 90vh;
+    }
+}
+
+@media (max-width: 640px) {
+    .vestidos {
+        gap: 10px;
+        padding: 1.5rem 0.8rem;
+    }
+
+    .vestidos img {
+        width: 100%;
+        max-width: calc(50% - 5px);
+        height: auto;
+        aspect-ratio: 3/4;
+    }
+
+    .carrossel-container {
+        padding: 2rem 0.8rem;
+    }
+
+    .carrossel-wrapper {
+        gap: 0.8rem;
+        padding: 0 0.5rem;
+    }
+
+    .carrossel {
+        gap: 1rem;
+        padding: 1rem 0;
+    }
+
+    .carrossel img {
+        flex: 0 0 200px;
+        height: 280px;
+    }
+
+    .carrossel-btn {
+        width: 38px;
+        height: 38px;
+    }
+
+    .carrossel-titulo {
+        font-size: 1.4rem;
+        margin-bottom: 1.3rem;
+    }
+
+    .navegacao ul {
+        gap: 1rem;
+        padding: 0.7rem 0;
+    }
+
+    .navegacao ul span {
+        font-size: 0.75rem;
+        letter-spacing: 0.5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pix {
+        font-size: 0.8rem;
+        padding: 5px 0;
+        letter-spacing: 2px;
+    }
+
+    .navbar {
+        padding: 6px 10px;
+        min-height: 55px;
+    }
+
+    .cursor {
+        font-size: 1.4rem;
+        width: 7ch;
+        border-right: 2px solid #77333b;
+    }
+
+    .actions {
+        gap: 10px;
+    }
+
+    .action-item {
+        min-width: 55px;
+    }
+
+    .action-item img {
+        height: 20px;
+    }
+
+    .action-item p {
+        font-size: 9px;
+        margin-top: 3px;
+    }
+
+    .navegacao ul {
+        gap: 0.6rem;
+        padding: 0.5rem 0;
+        font-size: 0.7rem;
+    }
+
+    .navegacao ul span {
+        font-size: 0.7rem;
+        letter-spacing: 0.3px;
+    }
+
+    .vestidos {
+        gap: 8px;
+        padding: 1rem 0.5rem;
+    }
+
+    .vestidos img {
+        width: calc(50% - 4px);
+        height: auto;
+        aspect-ratio: 3/4;
+    }
+
+    .carrossel-container {
+        padding: 1.5rem 0.5rem;
+    }
+
+    .carrossel-wrapper {
+        gap: 0.5rem;
+        padding: 0 0.3rem;
+    }
+
+    .carrossel {
+        gap: 0.8rem;
+        padding: 0.8rem 0;
+    }
+
+    .carrossel img {
+        flex: 0 0 160px;
+        height: 230px;
+    }
+
+    .carrossel-btn {
+        width: 36px;
+        height: 36px;
+        border: 2px solid #e6be8a;
+    }
+
+    .carrossel-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .carrossel-titulo {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+
+    .carrossel-btn:hover {
+        width: 38px;
+        height: 38px;
+    }
+
+    .modal-close {
+        top: 10px;
+        right: 10px;
+        width: 35px;
+        height: 35px;
+        font-size: 24px;
+    }
+
+    .modal-content {
+        max-width: 95vw;
+        max-height: 95vh;
+        border-radius: 12px;
+    }
+
+    .topo {
+        position: relative;
+        z-index: 100;
+    }
+
+    @media (max-width: 360px) {
+        .cursor {
+            font-size: 1.2rem;
+            width: 6ch;
+        }
+
+        .navegacao ul {
+            gap: 0.4rem;
+        }
+
+        .navegacao ul span {
+            font-size: 0.65rem;
+        }
+
+        .carrossel img {
+            flex: 0 0 140px;
+            height: 200px;
+        }
+
+        .carrossel-titulo {
+            font-size: 1rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .carrossel-btn {
+            width: 32px;
+            height: 32px;
+        }
+    }
+}
+
+/* 9. EFEITOS ADICIONAIS */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(230, 190, 138, 0.6);
+    transform: scale(0);
+    animation: rippleAnimation 0.6s ease-out;
+    pointer-events: none;
+}
+
+@keyframes rippleAnimation {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+

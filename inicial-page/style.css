@@ -1,0 +1,703 @@
+/* 1. CONFIGURAÇÕES GERAIS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: inherit;
+}
+
+body {
+    background: linear-gradient(135deg, #faf8f3 0%, #f4ede2 50%, #faf8f3 100%);
+    box-shadow: inset 0 0 100px rgba(119, 51, 59, 0.06);
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
+}
+
+/* 2. CABEÇALHO (BARRA PIX) */
+.pix {
+    background: linear-gradient(90deg, #f8f4ed 0%, #f9f6f0 50%, #f8f4ed 100%);
+    color: #77333b;
+    text-align: center;
+    letter-spacing: 3px;
+    font-size: 0.95rem;
+    padding: 8px 0;
+    font-weight: 500;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(90deg, transparent, #e6be8a 20%, #e6be8a 80%, transparent);
+    box-shadow: 0 0 12px rgba(230, 190, 138, 0.25);
+    margin: 0;
+    opacity: 0.7;
+}
+
+/* 3. NAVBAR E ANIMAÇÃO */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(180deg, rgba(248,244,237,0.95) 0%, rgba(250,248,243,0.98) 100%);
+    padding: 12px 40px;
+    position: relative;
+    min-height: 72px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 2px 16px rgba(119, 51, 59, 0.05);
+}
+
+.titulo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+}
+
+.cursor {
+    font-size: 3.2rem;
+    color: #77333b;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid #77333b;
+    width: 12ch;
+    margin: 0 auto;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+.typewriter-animation {
+    animation: 
+      typewriter 2.5s steps(15) 0.5s 1 normal both,
+      blinkingCursor 500ms steps(15) infinite normal;
+}
+
+@keyframes typewriter { from { width: 0; } to { width: 100%; } }
+@keyframes blinkingCursor { from { border-right-color: #77333b; } to { border-right-color: transparent; } }
+
+/* 4. ITENS DA DIREITA (ACTIONS) */
+.actions {
+    display: flex;
+    gap: 35px;
+    margin-left: auto;
+}
+
+.action-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    min-width: 85px;
+    transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
+    position: relative;
+}
+
+.action-item::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #e6be8a, transparent);
+    transition: width 0.3s ease;
+}
+
+.action-item:hover::after {
+    width: 100%;
+}
+
+.action-item:hover {
+    transform: translateY(-4px);
+}
+
+.action-item img {
+    height: 26px;
+    width: auto;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 2px 4px rgba(119, 51, 59, 0.1));
+}
+
+.action-item:hover img {
+    transform: scale(1.15);
+    filter: drop-shadow(0 4px 12px rgba(119, 51, 59, 0.2));
+}
+
+.action-item p {
+    font-size: 12px;
+    font-family: 'Montserrat', sans-serif;
+    color: #77333b;
+    margin-top: 6px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* 5. NAVEGAÇÃO */
+.navegacao ul {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+    justify-content: center;
+    padding: 1.2rem 0;
+    background: linear-gradient(135deg, rgba(248,244,237,0.98) 0%, rgba(250,248,243,0.96) 100%);
+    flex-wrap: wrap;
+}
+
+.navegacao ul a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.navegacao ul span {
+    cursor: pointer;
+    font-family: 'Cormorant Garamond', serif;
+    color: #77333b;
+    letter-spacing: 1.5px;
+    font-size: 1rem;
+    text-decoration: none;
+    position: relative;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.navegacao ul span::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #e6be8a, transparent);
+    transform: translateX(-50%);
+    transition: width 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+.navegacao ul span:hover::after {
+    width: 80%;
+}
+
+.navegacao ul span:hover {
+    color: #c6956b;
+}
+
+.nav-link {
+    cursor: pointer;
+}
+
+/* 6. VÍDEO DE FUNDO */
+.video-fundo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.video-fundo video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-fundo::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    background: 
+        radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 70%),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%);
+    box-shadow: 
+        inset 0 0 100px rgba(0, 0, 0, 0.4),
+        inset 0 -80px 120px rgba(0, 0, 0, 0.5);
+}
+
+/* 7. IMAGENS */
+.imagens-noiva {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 80px 2rem 100px;
+    position: relative;
+    flex-wrap: wrap;
+}
+
+.imagens-noiva div {
+    opacity: 0;
+    animation: slideInImage 0.8s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+}
+
+.imagens-noiva-1 { animation-delay: 0.2s; }
+.imagens-noiva-2 { animation-delay: 0.4s; }
+.imagens-noiva-3 { animation-delay: 0.6s; }
+
+@keyframes slideInImage {
+    from {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.imagens-noiva img {
+    width: 300px;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 15px 48px rgba(255, 255, 255, 0.4), 0 0 60px rgba(230, 190, 138, 0.2);
+    transition: all 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+}
+
+.imagens-noiva img:hover {
+    transform: scale(1.06) translateY(-8px);
+    box-shadow: 0 25px 60px rgba(255, 255, 255, 0.6), 0 0 80px rgba(230, 190, 138, 0.3);
+}
+
+/* 8. CARTÕES DE CATEGORIA */
+.texto-noiva {
+    position: relative;
+    width: 100%;
+    padding: 80px 2rem;
+    pointer-events: auto;
+    z-index: 10;
+}
+
+.texto-noiva ul {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    list-style: none;
+    flex-wrap: wrap;
+}
+
+.card-categoria {
+    width: 320px;
+    text-align: center;
+    color: #fff;
+    padding: 3rem 2rem;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(119, 51, 59, 0.85) 0%, rgba(100, 40, 50, 0.9) 100%);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(230, 190, 138, 0.2);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeInCard 0.8s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+}
+
+.card-categoria:nth-child(1) { animation-delay: 0.3s; }
+.card-categoria:nth-child(2) { animation-delay: 0.5s; }
+.card-categoria:nth-child(3) { animation-delay: 0.7s; }
+
+@keyframes fadeInCard {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card-categoria::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(230, 190, 138, 0.2), transparent);
+    transition: left 0.5s ease;
+    z-index: 1;
+}
+
+.card-categoria:hover::before {
+    left: 100%;
+}
+
+.card-categoria:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 80px rgba(230, 190, 138, 0.25);
+    background: linear-gradient(135deg, rgba(119, 51, 59, 0.95) 0%, rgba(100, 40, 50, 1) 100%);
+}
+
+.card-categoria a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: inherit;
+    text-decoration: none;
+}
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.card-categoria:hover .card-icon {
+    transform: scale(1.3) rotateY(360deg);
+    animation: bounce 0.6s ease;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: scale(1.3); }
+    50% { transform: scale(1.4); }
+}
+
+.card-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    letter-spacing: 1px;
+    z-index: 2;
+    position: relative;
+}
+
+.card-descricao {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    opacity: 0.95;
+    font-weight: 300;
+    letter-spacing: 0.3px;
+    z-index: 2;
+    position: relative;
+}
+
+/* 9. MODAL DE NOTIFICAÇÃO */
+.modal-notificacao {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-notificacao.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content-notif {
+    background: linear-gradient(135deg, rgba(119, 51, 59, 0.98) 0%, rgba(100, 40, 50, 1) 100%);
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    max-width: 400px;
+    width: 90%;
+    position: relative;
+    animation: slideInUp 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
+    border: 1px solid rgba(230, 190, 138, 0.2);
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-content-notif p {
+    color: #fff;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.modal-close-notif {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #f8f4ed;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(230, 190, 138, 0.1);
+    border: 1px solid rgba(230, 190, 138, 0.3);
+}
+
+.modal-close-notif:hover {
+    background: rgba(230, 190, 138, 0.3);
+    transform: rotate(90deg) scale(1.1);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* 10. RESPONSIVIDADE */
+@media (max-width: 1024px) {
+    .navbar {
+        padding: 10px 25px;
+        min-height: 65px;
+    }
+
+    .cursor {
+        font-size: 2.5rem;
+    }
+
+    .actions {
+        gap: 20px;
+    }
+
+    .action-item {
+        min-width: 75px;
+    }
+
+    .imagens-noiva {
+        gap: 1.5rem;
+        padding: 60px 1.5rem 80px;
+    }
+
+    .imagens-noiva img {
+        width: 250px;
+    }
+
+    .texto-noiva ul {
+        gap: 2rem;
+    }
+
+    .card-categoria {
+        width: 280px;
+        padding: 2.5rem 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 8px 15px;
+        min-height: 60px;
+    }
+
+    .cursor {
+        font-size: 1.8rem;
+        width: 9ch;
+    }
+
+    .actions {
+        gap: 15px;
+    }
+
+    .action-item {
+        min-width: 65px;
+    }
+
+    .action-item img {
+        height: 22px;
+    }
+
+    .action-item p {
+        font-size: 11px;
+        margin-top: 4px;
+    }
+
+    .navegacao ul {
+        gap: 1.5rem;
+        padding: 0.8rem 0;
+    }
+
+    .navegacao ul span {
+        font-size: 0.85rem;
+        letter-spacing: 1px;
+    }
+
+    .imagens-noiva {
+        gap: 1rem;
+        padding: 40px 1rem 60px;
+    }
+
+    .imagens-noiva img {
+        width: 200px;
+    }
+
+    .texto-noiva {
+        padding: 60px 1rem;
+    }
+
+    .texto-noiva ul {
+        gap: 1.5rem;
+    }
+
+    .card-categoria {
+        width: 100%;
+        max-width: 250px;
+        padding: 2rem 1.5rem;
+    }
+
+    .card-icon {
+        font-size: 2.5rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .card-titulo {
+        font-size: 1.5rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .card-descricao {
+        font-size: 0.9rem;
+    }
+
+    .pix {
+        font-size: 0.85rem;
+        padding: 6px 0;
+    }
+
+    .topo {
+        position: relative;
+        z-index: 100;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 8px 10px;
+        min-height: 55px;
+    }
+
+    .cursor {
+        font-size: 1.4rem;
+        width: 7ch;
+        border-right: 2px solid #77333b;
+    }
+
+    .actions {
+        gap: 10px;
+    }
+
+    .action-item {
+        min-width: 55px;
+    }
+
+    .action-item img {
+        height: 20px;
+    }
+
+    .action-item p {
+        font-size: 10px;
+        margin-top: 3px;
+    }
+
+    .navegacao ul {
+        gap: 0.8rem;
+        padding: 0.6rem 0;
+        font-size: 0.75rem;
+    }
+
+    .navegacao ul span {
+        font-size: 0.75rem;
+        letter-spacing: 0.5px;
+    }
+
+    .imagens-noiva {
+        gap: 0.8rem;
+        padding: 30px 0.5rem 50px;
+    }
+
+    .imagens-noiva div {
+        width: 100%;
+    }
+
+    .imagens-noiva img {
+        width: 100%;
+        max-width: 180px;
+    }
+
+    .texto-noiva {
+        padding: 50px 0.5rem;
+    }
+
+    .texto-noiva ul {
+        gap: 1rem;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card-categoria {
+        width: 100%;
+        max-width: 100%;
+        padding: 1.5rem 1rem;
+    }
+
+    .card-icon {
+        font-size: 2rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .card-titulo {
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .card-descricao {
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+
+    .pix {
+        font-size: 0.8rem;
+        padding: 5px 0;
+        letter-spacing: 2px;
+    }
+
+    .modal-content-notif {
+        padding: 2rem;
+        max-width: 90vw;
+    }
+
+    .modal-content-notif p {
+        font-size: 1.3rem;
+    }
+
+    .modal-close-notif {
+        top: 10px;
+        right: 10px;
+        width: 30px;
+        height: 30px;
+        font-size: 24px;
+    }
+}
