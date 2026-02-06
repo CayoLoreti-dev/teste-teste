@@ -469,6 +469,143 @@ hr {
     to { opacity: 1; }
 }
 
+/* 9. MENU HAMBURGUÊS E DRAWER */
+.menu-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 1001;
+    position: relative;
+}
+
+.menu-hamburger span {
+    width: 28px;
+    height: 3px;
+    background: #77333b;
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+.menu-hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(10px, 10px);
+}
+
+.menu-hamburger.active span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-10px);
+}
+
+.menu-hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+.drawer {
+    position: fixed;
+    left: -100%;
+    top: 0;
+    width: 70%;
+    height: 100vh;
+    background: linear-gradient(180deg, #faf8f3 0%, #f4ede2 100%);
+    box-shadow: 2px 0 20px rgba(119, 51, 59, 0.15);
+    transition: left 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
+    z-index: 999;
+    overflow-y: auto;
+}
+
+.drawer.open {
+    left: 0;
+}
+
+.drawer-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.drawer-close {
+    align-self: flex-start;
+    background: none;
+    border: none;
+    font-size: 32px;
+    color: #77333b;
+    cursor: pointer;
+    padding: 8px;
+    margin-bottom: 30px;
+    transition: transform 0.2s ease;
+}
+
+.drawer-close:hover {
+    transform: rotate(90deg);
+}
+
+.drawer-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    flex: 1;
+}
+
+.drawer-action-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: rgba(230, 190, 138, 0.1);
+    border: 1px solid rgba(230, 190, 138, 0.3);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.drawer-action-item:hover {
+    background: rgba(230, 190, 138, 0.25);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(230, 190, 138, 0.2);
+}
+
+.drawer-action-item span {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+.drawer-action-item span img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+.drawer-action-item p {
+    color: #77333b;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.drawer-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 998;
+    backdrop-filter: blur(2px);
+}
+
+.drawer-overlay.open {
+    display: block;
+}
+
 /* 10. RESPONSIVIDADE */
 @media (max-width: 1024px) {
     .navbar {
@@ -508,6 +645,18 @@ hr {
 }
 
 @media (max-width: 768px) {
+    .menu-hamburger {
+        display: flex;
+    }
+
+    .actions {
+        display: none;
+    }
+
+    .drawer {
+        width: 75%;
+    }
+
     .navbar {
         padding: 8px 15px;
         min-height: 60px;
@@ -518,26 +667,10 @@ hr {
         width: 9ch;
     }
 
-    .actions {
-        gap: 15px;
-    }
-
-    .action-item {
-        min-width: 65px;
-    }
-
-    .action-item img {
-        height: 22px;
-    }
-
-    .action-item p {
-        font-size: 11px;
-        margin-top: 4px;
-    }
-
     .navegacao ul {
         gap: 1.5rem;
-        padding: 0.8rem 0;
+        padding: 0.8rem 1rem;
+        margin: 0 0.5rem;
     }
 
     .navegacao ul span {
@@ -594,6 +727,18 @@ hr {
 }
 
 @media (max-width: 480px) {
+    .menu-hamburger {
+        display: flex;
+    }
+
+    .actions {
+        display: none;
+    }
+
+    .drawer {
+        width: 80%;
+    }
+
     .navbar {
         padding: 8px 10px;
         min-height: 55px;
@@ -605,26 +750,10 @@ hr {
         border-right: 2px solid #77333b;
     }
 
-    .actions {
-        gap: 10px;
-    }
-
-    .action-item {
-        min-width: 55px;
-    }
-
-    .action-item img {
-        height: 20px;
-    }
-
-    .action-item p {
-        font-size: 10px;
-        margin-top: 3px;
-    }
-
     .navegacao ul {
         gap: 0.8rem;
-        padding: 0.6rem 0;
+        padding: 0.6rem 1rem;
+        margin: 0 0.3rem;
         font-size: 0.75rem;
     }
 

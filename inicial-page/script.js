@@ -155,5 +155,48 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // ===== 9. MENU HAMBURGUÊS =====
+    const menuHamburger = document.getElementById('menuHamburger');
+    const drawer = document.getElementById('drawer');
+    const drawerClose = document.getElementById('drawerClose');
+    const drawerOverlay = document.getElementById('drawerOverlay');
+    const drawerActionItems = document.querySelectorAll('.drawer-action-item');
+
+    // Abrir/fechar drawer ao clicar no menu hamburguês
+    if (menuHamburger) {
+        menuHamburger.addEventListener('click', () => {
+            menuHamburger.classList.toggle('active');
+            drawer.classList.toggle('open');
+            drawerOverlay.classList.toggle('open');
+        });
+    }
+
+    // Fechar drawer ao clicar no botão de fechar
+    if (drawerClose) {
+        drawerClose.addEventListener('click', () => {
+            menuHamburger.classList.remove('active');
+            drawer.classList.remove('open');
+            drawerOverlay.classList.remove('open');
+        });
+    }
+
+    // Fechar drawer ao clicar no overlay
+    if (drawerOverlay) {
+        drawerOverlay.addEventListener('click', () => {
+            menuHamburger.classList.remove('active');
+            drawer.classList.remove('open');
+            drawerOverlay.classList.remove('open');
+        });
+    }
+
+    // Fechar drawer ao clicar em um item
+    drawerActionItems.forEach(item => {
+        item.addEventListener('click', () => {
+            menuHamburger.classList.remove('active');
+            drawer.classList.remove('open');
+            drawerOverlay.classList.remove('open');
+        });
+    });
+
     console.log('Página inicial carregada com sucesso! 🎉');
 });
