@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('modalNotificacao');
     const closeBtn = document.querySelector('.modal-close-notif');
     const navLinks = document.querySelectorAll('.nav-link');
+    const navItems = document.querySelectorAll('.navegacao ul span');
     const cards = document.querySelectorAll('.card-categoria');
 
     const closeModal = () => {
@@ -32,9 +33,14 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             document.getElementById('mensagemNotificacao').textContent = 'Esta seção em breve!';
             modal.classList.add('show');
-            
-            // Ripple effect
-            createRipple(link, e);
+        });
+    });
+
+    // ===== 2.1. ESTADO ATIVO DO NAV =====
+    navItems.forEach(item => {
+        item.addEventListener('click', () => {
+            navItems.forEach(el => el.classList.remove('active'));
+            item.classList.add('active');
         });
     });
 

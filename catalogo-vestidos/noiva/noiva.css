@@ -253,7 +253,7 @@ hr {
 }
 
 .drawer-action-item img {
-    height: 28px;
+    height: 16px;
     width: auto;
     margin-bottom: 8px;
     transition: all 0.3s ease;
@@ -865,6 +865,7 @@ hr {
     .vestidos {
         gap: 10px;
         padding: 1.5rem 1rem;
+        justify-content: center;
     }
 
     .vestidos img {
@@ -872,6 +873,7 @@ hr {
         max-width: calc(50% - 5px);
         height: auto;
         aspect-ratio: 3/4;
+        margin: 0 auto;
     }
 
     .carrossel-container {

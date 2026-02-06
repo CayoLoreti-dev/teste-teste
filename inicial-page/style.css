@@ -142,14 +142,27 @@ hr {
 }
 
 /* 5. NAVEGAÇÃO */
+nav {
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, rgba(248,244,237,0.98) 0%, rgba(250,248,243,0.96) 100%);
+}
 .navegacao ul {
     display: flex;
-    gap: 2.5rem;
+    gap: 1.5rem;
     list-style: none;
     justify-content: center;
-    padding: 1.2rem 0;
-    background: linear-gradient(135deg, rgba(248,244,237,0.98) 0%, rgba(250,248,243,0.96) 100%);
+    padding: 1rem 0;
+    background: transparent;
     flex-wrap: wrap;
+    width: 100%;
+    margin: 0;
 }
 
 .navegacao ul a {
@@ -162,17 +175,25 @@ hr {
     font-family: 'Cormorant Garamond', serif;
     color: #77333b;
     letter-spacing: 1.5px;
-    font-size: 1rem;
+    font-size: 1.15rem;
     text-decoration: none;
     position: relative;
-    font-weight: 500;
+    font-weight: 600;
     transition: all 0.3s ease;
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    line-height: 1;
+    overflow: hidden;
 }
 
 .navegacao ul span::after {
     content: '';
     position: absolute;
-    bottom: -5px;
+    bottom: 3px;
     left: 50%;
     width: 0;
     height: 2px;
@@ -182,11 +203,24 @@ hr {
 }
 
 .navegacao ul span:hover::after {
-    width: 80%;
+    width: 70%;
 }
 
 .navegacao ul span:hover {
     color: #c6956b;
+    background: rgba(230, 190, 138, 0.18);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(119, 51, 59, 0.08);
+}
+
+.navegacao ul span.active {
+    color: #c6956b;
+    background: rgba(230, 190, 138, 0.24);
+    box-shadow: 0 10px 24px rgba(119, 51, 59, 0.12);
+}
+
+.navegacao ul span.active::after {
+    width: 70%;
 }
 
 .nav-link {
@@ -569,8 +603,8 @@ hr {
 }
 
 .drawer-action-item span {
-    width: 50px;
-    height: 50px;
+    width: 34px;
+    height: 34px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -578,8 +612,8 @@ hr {
 }
 
 .drawer-action-item span img {
-    width: 32px;
-    height: 32px;
+    width: 18px;
+    height: 18px;
     object-fit: contain;
 }
 
@@ -681,6 +715,7 @@ hr {
     .imagens-noiva {
         gap: 1rem;
         padding: 40px 1rem 60px;
+        align-items: center;
     }
 
     .imagens-noiva img {
@@ -765,15 +800,19 @@ hr {
     .imagens-noiva {
         gap: 0.8rem;
         padding: 30px 0.5rem 50px;
+        align-items: center;
     }
 
     .imagens-noiva div {
         width: 100%;
+        display: flex;
+        justify-content: center;
     }
 
     .imagens-noiva img {
         width: 100%;
         max-width: 180px;
+        margin: 0 auto;
     }
 
     .texto-noiva {
