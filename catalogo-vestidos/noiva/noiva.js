@@ -2,6 +2,61 @@
 // Define delays dinâmicos para as imagens dentro de .vestidos e inicia a animação
 
 document.addEventListener('DOMContentLoaded', () => {
+  // ===== 0. MODAL DE NOTIFICAÇÃO =====
+  const notifyModal = document.getElementById('modalNotificacao');
+  const notifyCloseBtn = document.querySelector('.modal-close-notif');
+  const notifyMessage = document.getElementById('mensagemNotificacao');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const navItems = document.querySelectorAll('.navegacao ul span');
+
+  const closeNotifyModal = () => {
+    notifyModal?.classList.remove('show');
+  };
+
+  const showNotifyModal = (message) => {
+    if (!notifyModal || !notifyMessage) return;
+    notifyMessage.textContent = message;
+    notifyModal.classList.add('show');
+  };
+
+  notifyCloseBtn?.addEventListener('click', closeNotifyModal);
+
+  notifyModal?.addEventListener('click', (e) => {
+    if (e.target === notifyModal) {
+      closeNotifyModal();
+    }
+  });
+
+  // Fechar modal de notificação com ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeNotifyModal();
+    }
+  });
+
+  // Abrir modal nos links de navegação
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      showNotifyModal('Esta seção em breve!');
+    });
+  });
+
+  // Estado ativo do nav
+  navItems.forEach(item => {
+    item.addEventListener('click', () => {
+      navItems.forEach(el => el.classList.remove('active'));
+      item.classList.add('active');
+    });
+  });
+
+  // Ações do topo (Atendimento, Conta, Carrinho)
+  document.querySelectorAll('.action-item').forEach(item => {
+    item.addEventListener('click', () => {
+      showNotifyModal('Funcionalidade em desenvolvimento!');
+    });
+  });
+
   // ===== PARTE 1: ANIMAÇÃO DAS IMAGENS PRINCIPAIS =====
   const vestidosContainer = document.querySelector('.vestidos');
   if (vestidosContainer) {
@@ -275,6 +330,8 @@ document.addEventListener('DOMContentLoaded', () => {
     item.addEventListener('click', () => {
       menuHamburger.classList.remove('active');
       drawer.classList.remove('open');
+
+      showNotifyModal('Funcionalidade em desenvolvimento!');
     });
   });
 

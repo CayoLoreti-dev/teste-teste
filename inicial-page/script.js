@@ -197,10 +197,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Fechar drawer ao clicar em um item
     drawerActionItems.forEach(item => {
-        item.addEventListener('click', () => {
+        item.addEventListener('click', (e) => {
             menuHamburger.classList.remove('active');
             drawer.classList.remove('open');
             drawerOverlay.classList.remove('open');
+
+            // Mostrar o mesmo modal de "em construção" do desktop
+            document.getElementById('mensagemNotificacao').textContent = 'Funcionalidade em desenvolvimento!';
+            modal.classList.add('show');
         });
     });
 
