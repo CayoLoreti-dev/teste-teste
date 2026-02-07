@@ -157,6 +157,66 @@ hr {
     border-radius: 10px;
 }
 
+/* Botão de modo escuro isolado à esquerda */
+.theme-toggle-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    min-width: 85px;
+    transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
+    position: relative;
+    background: none;
+    border: none;
+    padding: 0;
+    margin-right: auto;
+}
+
+.theme-toggle-left::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #e6be8a, transparent);
+    transition: width 0.3s ease;
+}
+
+.theme-toggle-left:hover::after {
+    width: 100%;
+}
+
+.theme-toggle-left:hover {
+    transform: translateY(-4px);
+}
+
+.theme-toggle-left .theme-icon {
+    font-size: 22px;
+    line-height: 1;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 2px 4px rgba(119, 51, 59, 0.1));
+}
+
+.theme-toggle-left:hover .theme-icon {
+    transform: scale(1.15);
+    filter: drop-shadow(0 4px 12px rgba(119, 51, 59, 0.2));
+}
+
+.theme-toggle-left .theme-label {
+    font-size: 12px;
+    font-family: 'Montserrat', sans-serif;
+    color: #77333b;
+    margin-top: 6px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.theme-toggle-left:focus-visible {
+    outline: 2px solid #e6be8a;
+    outline-offset: 4px;
+    border-radius: 10px;
+}
+
 /* 4.5 MENU HAMBURGUÊS */
 .menu-hamburger {
     display: none;
@@ -344,6 +404,10 @@ body[data-theme="dark"] .cursor {
 }
 
 body[data-theme="dark"] .action-item p {
+    color: #f0e7df;
+}
+
+body[data-theme="dark"] .theme-toggle-left .theme-label {
     color: #f0e7df;
 }
 
@@ -927,6 +991,14 @@ body[data-theme="dark"] .drawer-action-item p {
     .actions {
         gap: 20px;
     }
+    
+    .theme-toggle-left {
+        min-width: 75px;
+    }
+    
+    .theme-toggle-left .theme-icon {
+        font-size: 20px;
+    }
 
     .vestidos {
         gap: 15px;
@@ -976,6 +1048,18 @@ body[data-theme="dark"] .drawer-action-item p {
     .navbar {
         padding: 8px 15px;
         min-height: 60px;
+    }
+    
+    .theme-toggle-left {
+        min-width: 70px;
+    }
+    
+    .theme-toggle-left .theme-label {
+        font-size: 10px;
+    }
+    
+    .theme-toggle-left .theme-icon {
+        font-size: 20px;
     }
 
     .menu-hamburger {
@@ -1134,6 +1218,19 @@ body[data-theme="dark"] .drawer-action-item p {
 
     .actions {
         display: none;
+    }
+    
+    .theme-toggle-left {
+        display: flex;
+        min-width: 60px;
+    }
+    
+    .theme-toggle-left .theme-label {
+        font-size: 9px;
+    }
+    
+    .theme-toggle-left .theme-icon {
+        font-size: 18px;
     }
 
     .drawer {
@@ -1302,5 +1399,71 @@ body[data-theme="dark"] .drawer-action-item p {
         transform: scale(4);
         opacity: 0;
     }
+}
+
+/* 10. RODAPÉ */
+.footer {
+    background: linear-gradient(180deg, rgba(248,244,237,0.95) 0%, rgba(250,248,243,0.98) 100%);
+    backdrop-filter: blur(5px);
+    padding: 1.5rem 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(230, 190, 138, 0.3);
+    box-shadow: 0 -2px 16px rgba(119, 51, 59, 0.05);
+    position: relative;
+    margin-top: 3rem;
+}
+
+.footer p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    color: #77333b;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+.footer a {
+    color: #c6956b;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    padding-bottom: 2px;
+}
+
+.footer a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #e6be8a, #c6956b);
+    transition: width 0.3s ease;
+}
+
+.footer a:hover {
+    color: #e6be8a;
+}
+
+.footer a:hover::after {
+    width: 100%;
+}
+
+body[data-theme="dark"] .footer {
+    background: linear-gradient(180deg, rgba(26, 19, 23, 0.95) 0%, rgba(23, 16, 19, 0.98) 100%);
+    border-top-color: rgba(230, 190, 138, 0.2);
+    box-shadow: 0 -2px 16px rgba(0, 0, 0, 0.4);
+}
+
+body[data-theme="dark"] .footer p {
+    color: #f0e7df;
+}
+
+body[data-theme="dark"] .footer a {
+    color: #f3cfa0;
+}
+
+body[data-theme="dark"] .footer a:hover {
+    color: #e6be8a;
 }
 

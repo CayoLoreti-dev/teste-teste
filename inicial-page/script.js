@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.nav-link');
     const navItems = document.querySelectorAll('.navegacao ul span');
     const cards = document.querySelectorAll('.card-categoria');
-    const themeToggles = document.querySelectorAll('.theme-toggle');
+    const themeToggles = document.querySelectorAll('.theme-toggle, .theme-toggle-left');
 
     const closeModal = () => {
         modal.classList.remove('show');
