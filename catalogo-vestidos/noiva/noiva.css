@@ -1716,6 +1716,33 @@ body[data-theme="dark"] .modal-historia-texto::-webkit-scrollbar-thumb:hover {
     }
 }
 
+/* 9.8 CTA - Voltar ao início */
+.catalogo-cta-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 2.5rem 1.5rem 1rem;
+}
+
+.catalogo-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.9rem 2.2rem;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #c6956b 0%, #e6be8a 100%);
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 10px 26px rgba(198, 149, 107, 0.35);
+}
+
+.catalogo-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px rgba(198, 149, 107, 0.45);
+}
+
 /* 10. RODAPÉ */
 .footer {
     background: linear-gradient(180deg, rgba(248,244,237,0.95) 0%, rgba(250,248,243,0.98) 100%);
