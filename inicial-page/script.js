@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.nav-link');
     const navItems = document.querySelectorAll('.navegacao ul span');
     const cards = document.querySelectorAll('.card-categoria');
+    const themeToggles = document.querySelectorAll('.theme-toggle');
 
     const closeModal = () => {
         modal.classList.remove('show');
@@ -26,6 +27,36 @@ document.addEventListener('DOMContentLoaded', () => {
             closeModal();
         }
     });
+
+    // ===== 1.1. MODO ESCURO =====
+    const storedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initialTheme = storedTheme || (prefersDark ? 'dark' : 'light');
+    document.body.setAttribute('data-theme', initialTheme);
+
+    const updateThemeToggles = () => {
+        const isDark = document.body.getAttribute('data-theme') === 'dark';
+        themeToggles.forEach(btn => {
+            btn.setAttribute('aria-pressed', String(isDark));
+            const label = btn.querySelector('.theme-label');
+            const icon = btn.querySelector('.theme-icon');
+            if (label) label.textContent = isDark ? 'Modo claro' : 'Modo escuro';
+            if (icon) icon.textContent = isDark ? '☀️' : '🌙';
+        });
+    };
+
+    themeToggles.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const isDark = document.body.getAttribute('data-theme') === 'dark';
+            const nextTheme = isDark ? 'light' : 'dark';
+            document.body.setAttribute('data-theme', nextTheme);
+            localStorage.setItem('theme', nextTheme);
+            updateThemeToggles();
+        });
+    });
+
+    updateThemeToggles();
 
     // ===== 2. ABERTURA DO MODAL NOS LINKS DE NAVEGAÇÃO =====
     navLinks.forEach(link => {
@@ -106,6 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Adicionar ripple ao clicar nos action-items
     document.querySelectorAll('.action-item').forEach(item => {
         item.addEventListener('click', (e) => {
+            if (item.classList.contains('theme-toggle')) return;
             createRipple(item, e);
             document.getElementById('mensagemNotificacao').textContent = 'Funcionalidade em desenvolvimento!';
             modal.classList.add('show');
@@ -198,6 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fechar drawer ao clicar em um item
     drawerActionItems.forEach(item => {
         item.addEventListener('click', (e) => {
+            if (item.classList.contains('theme-toggle')) return;
             menuHamburger.classList.remove('active');
             drawer.classList.remove('open');
             drawerOverlay.classList.remove('open');

@@ -141,6 +141,23 @@ hr {
     letter-spacing: 0.5px;
 }
 
+.action-item.theme-toggle {
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.action-item.theme-toggle .theme-icon {
+    font-size: 18px;
+    line-height: 1;
+}
+
+.action-item.theme-toggle:focus-visible {
+    outline: 2px solid #e6be8a;
+    outline-offset: 4px;
+    border-radius: 10px;
+}
+
 /* 5. NAVEGAÇÃO */
 nav {
     width: 100%;
@@ -624,6 +641,16 @@ nav {
     text-align: center;
 }
 
+.drawer-action-item.theme-toggle {
+    background: rgba(230, 190, 138, 0.12);
+    border: 1px solid rgba(230, 190, 138, 0.35);
+}
+
+.drawer-action-item.theme-toggle .theme-icon {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
 .drawer-overlay {
     display: none;
     position: fixed;
@@ -638,6 +665,95 @@ nav {
 
 .drawer-overlay.open {
     display: block;
+}
+
+/* 11. MODO ESCURO */
+body[data-theme="dark"] {
+    background: linear-gradient(135deg, #120c0f 0%, #1b1417 50%, #120c0f 100%);
+    color: #f6eee6;
+    box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.6);
+}
+
+body[data-theme="dark"] .pix {
+    background: linear-gradient(90deg, #1a1317 0%, #21181d 50%, #1a1317 100%);
+    color: #f0e7df;
+}
+
+body[data-theme="dark"] hr {
+    background: linear-gradient(90deg, transparent, #6e4b55 20%, #6e4b55 80%, transparent);
+    box-shadow: 0 0 12px rgba(110, 75, 85, 0.35);
+}
+
+body[data-theme="dark"] .navbar {
+    background: linear-gradient(180deg, rgba(26, 19, 23, 0.95) 0%, rgba(23, 16, 19, 0.98) 100%);
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
+}
+
+body[data-theme="dark"] .cursor {
+    color: #f2e7df;
+    border-right-color: #f2e7df;
+}
+
+body[data-theme="dark"] .action-item p {
+    color: #f0e7df;
+}
+
+body[data-theme="dark"] .menu-hamburger span {
+    background: #f0e7df;
+}
+
+body[data-theme="dark"] nav {
+    background: linear-gradient(135deg, rgba(26, 19, 23, 0.98) 0%, rgba(23, 16, 19, 0.96) 100%);
+}
+
+body[data-theme="dark"] .navegacao ul span {
+    color: #f0e7df;
+}
+
+body[data-theme="dark"] .navegacao ul span:hover {
+    color: #f3cfa0;
+    background: rgba(230, 190, 138, 0.18);
+}
+
+body[data-theme="dark"] .navegacao ul span.active {
+    color: #f3cfa0;
+    background: rgba(230, 190, 138, 0.22);
+}
+
+body[data-theme="dark"] .video-fundo::after {
+    background:
+        radial-gradient(ellipse at center, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.75) 70%),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.65) 100%);
+    box-shadow:
+        inset 0 0 120px rgba(0, 0, 0, 0.65),
+        inset 0 -100px 140px rgba(0, 0, 0, 0.7);
+}
+
+body[data-theme="dark"] .drawer {
+    background: linear-gradient(180deg, #1a1317 0%, #120c0f 100%);
+    box-shadow: 2px 0 20px rgba(0, 0, 0, 0.45);
+}
+
+body[data-theme="dark"] .drawer-close {
+    color: #f0e7df;
+}
+
+body[data-theme="dark"] .drawer-action-item {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(230, 190, 138, 0.2);
+}
+
+body[data-theme="dark"] .drawer-action-item p {
+    color: #f0e7df;
+}
+
+body[data-theme="dark"] .card-categoria {
+    background: linear-gradient(135deg, rgba(30, 18, 22, 0.92) 0%, rgba(20, 12, 15, 0.95) 100%);
+    border: 1px solid rgba(230, 190, 138, 0.2);
+}
+
+body[data-theme="dark"] .card-categoria:hover {
+    background: linear-gradient(135deg, rgba(40, 24, 29, 0.96) 0%, rgba(24, 14, 18, 0.98) 100%);
 }
 
 /* 10. RESPONSIVIDADE */

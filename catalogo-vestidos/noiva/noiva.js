@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const notifyMessage = document.getElementById('mensagemNotificacao');
   const navLinks = document.querySelectorAll('.nav-link');
   const navItems = document.querySelectorAll('.navegacao ul span');
+  const themeToggles = document.querySelectorAll('.theme-toggle');
 
   const closeNotifyModal = () => {
     notifyModal?.classList.remove('show');
@@ -34,6 +35,36 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // ===== 0.1. MODO ESCURO =====
+  const storedTheme = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const initialTheme = storedTheme || (prefersDark ? 'dark' : 'light');
+  document.body.setAttribute('data-theme', initialTheme);
+
+  const updateThemeToggles = () => {
+    const isDark = document.body.getAttribute('data-theme') === 'dark';
+    themeToggles.forEach(btn => {
+      btn.setAttribute('aria-pressed', String(isDark));
+      const label = btn.querySelector('.theme-label');
+      const icon = btn.querySelector('.theme-icon');
+      if (label) label.textContent = isDark ? 'Modo claro' : 'Modo escuro';
+      if (icon) icon.textContent = isDark ? '☀️' : '🌙';
+    });
+  };
+
+  themeToggles.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const isDark = document.body.getAttribute('data-theme') === 'dark';
+      const nextTheme = isDark ? 'light' : 'dark';
+      document.body.setAttribute('data-theme', nextTheme);
+      localStorage.setItem('theme', nextTheme);
+      updateThemeToggles();
+    });
+  });
+
+  updateThemeToggles();
+
   // Abrir modal nos links de navegação
   navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
@@ -53,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Ações do topo (Atendimento, Conta, Carrinho)
   document.querySelectorAll('.action-item').forEach(item => {
     item.addEventListener('click', () => {
+      if (item.classList.contains('theme-toggle')) return;
       showNotifyModal('Funcionalidade em desenvolvimento!');
     });
   });
@@ -155,10 +187,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 3.2: Variáveis de controle
   const isMobile = window.innerWidth <= 768;
-  const scrollAmount = isMobile ? 200 : 340;
+  let scrollAmount = isMobile ? 200 : 340;
   let isDragging = false;
   let startX = 0;
   let scrollLeft = 0;
+  let autoScrollTimer = null;
+  let autoScrollResumeTimer = null;
+  const autoScrollDelay = 2600;
+  const autoScrollResumeDelay = 1800;
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const startAutoScroll = () => {
+    if (prefersReducedMotion || autoScrollTimer) return;
+    autoScrollTimer = setInterval(() => {
+      if (isDragging || isTouching) return;
+      const maxScrollLeft = carrossel.scrollWidth - carrossel.clientWidth;
+      if (carrossel.scrollLeft >= maxScrollLeft - 5) {
+        carrossel.scrollTo({ left: 0, behavior: 'smooth' });
+        return;
+      }
+
+      carrossel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }, autoScrollDelay);
+  };
+
+  const stopAutoScroll = () => {
+    if (!autoScrollTimer) return;
+    clearInterval(autoScrollTimer);
+    autoScrollTimer = null;
+  };
+
+  const pauseAutoScroll = () => {
+    stopAutoScroll();
+    if (autoScrollResumeTimer) clearTimeout(autoScrollResumeTimer);
+    autoScrollResumeTimer = setTimeout(startAutoScroll, autoScrollResumeDelay);
+  };
 
   // 3.3: Navegação com Botões
   btnPrev?.addEventListener('click', () => {
@@ -166,6 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
       left: -scrollAmount,
       behavior: 'smooth'
     });
+    pauseAutoScroll();
   });
 
   btnNext?.addEventListener('click', () => {
@@ -173,6 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
       left: scrollAmount,
       behavior: 'smooth'
     });
+    pauseAutoScroll();
   });
 
   // 3.4: Navegação com Mouse Wheel (Scroll do Mouse)
@@ -182,6 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
       left: e.deltaY > 0 ? scrollAmount : -scrollAmount,
       behavior: 'smooth'
     });
+    pauseAutoScroll();
   });
 
   // 3.5: Drag ao selecionar (compatibilidade com mouse)
@@ -194,6 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
     scrollLeft = carrossel.scrollLeft;
     carrossel.style.scrollBehavior = 'auto';
     carrossel.style.cursor = 'grabbing';
+    pauseAutoScroll();
   });
 
   carrossel.addEventListener('mouseleave', () => {
@@ -206,6 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
     isDragging = false;
     carrossel.style.scrollBehavior = 'smooth';
     carrossel.style.cursor = 'grab';
+    pauseAutoScroll();
   });
 
   carrossel.addEventListener('mousemove', (e) => {
@@ -226,11 +295,13 @@ document.addEventListener('DOMContentLoaded', () => {
     touchStartXCarrossel = e.touches[0].pageX - carrossel.offsetLeft;
     touchScrollLeft = carrossel.scrollLeft;
     carrossel.style.scrollBehavior = 'auto';
+    pauseAutoScroll();
   });
 
   carrossel.addEventListener('touchend', () => {
     isTouching = false;
     carrossel.style.scrollBehavior = 'smooth';
+    pauseAutoScroll();
   });
 
   carrossel.addEventListener('touchmove', (e) => {
@@ -244,6 +315,12 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // 4.1: Cursor inicial
   carrossel.style.cursor = 'grab';
+  // 4.1.1: Auto-scroll suave quando não há interação
+  carrosselWrapper?.addEventListener('mouseenter', pauseAutoScroll);
+  carrosselWrapper?.addEventListener('mouseleave', startAutoScroll);
+  carrosselWrapper?.addEventListener('touchstart', pauseAutoScroll, { passive: true });
+
+  startAutoScroll();
 
   // 4.2: Efeito de parallax suave no scroll da página
   window.addEventListener('scroll', () => {
@@ -328,6 +405,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Fechar drawer ao clicar em um item
   drawerActionItems.forEach(item => {
     item.addEventListener('click', () => {
+      if (item.classList.contains('theme-toggle')) return;
       menuHamburger.classList.remove('active');
       drawer.classList.remove('open');
 
