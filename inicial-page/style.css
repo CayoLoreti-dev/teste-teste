@@ -350,6 +350,7 @@ nav {
 .imagens-noiva div {
     opacity: 0;
     animation: slideInImage 0.8s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+    position: relative;
 }
 
 .imagens-noiva-1 { animation-delay: 0.2s; }
@@ -376,6 +377,56 @@ nav {
     cursor: pointer;
     position: relative;
     z-index: 1;
+}
+
+.imagem-link {
+    display: block;
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.imagem-link img {
+    display: block;
+    width: 100%;
+}
+
+.imagem-link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.45) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+}
+
+.imagem-texto {
+    position: absolute;
+    left: 50%;
+    bottom: 16px;
+    top: auto;
+    transform: translateX(-50%);
+    padding: 0.9rem 1.8rem;
+    border-radius: 999px;
+    background: rgba(119, 51, 59, 0.55);
+    color: rgba(255, 255, 255, 0.85);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    letter-spacing: 1px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    z-index: 3;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.imagem-link:hover::after {
+    opacity: 1;
+}
+
+.imagem-link:hover .imagem-texto {
+    transform: translateX(-50%) scale(1.05);
+    background: rgba(119, 51, 59, 0.75);
 }
 
 .imagens-noiva img:hover {

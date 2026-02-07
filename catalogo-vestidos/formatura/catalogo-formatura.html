@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Catálogo Formaturas - SSISSI</title>
+</head>
+<body>
+<header class="topo">
+    <div class="pix">
+        <p>Pagamento em pix 10% de desconto</p>
+    </div>
+    <hr>
+    <div class="navbar">
+        <button class="theme-toggle-left" type="button" aria-pressed="false">
+            <span class="theme-icon" aria-hidden="true">🌙</span>
+            <p class="theme-label">Modo escuro</p>
+        </button>
+
+        <div class="logo"></div>
+
+        <div class="titulo">
+            <p class="cursor typewriter-animation">Formaturas</p>
+        </div>
+
+        <div class="actions">
+            <div class="action-item">
+                <span><img src="../../inicial-page/items/Vector.png" alt="Atendimento"></span>
+                <p>Atendimento</p>
+            </div>
+
+            <div class="action-item" id="btnMinhaConta">
+                <span><img src="../../inicial-page/items/Vector (1).png" alt="Minha Conta"></span>
+                <p id="labelMinhaConta">Minha Conta</p>
+            </div>
+
+            <div class="action-item">
+                <span><img src="../../inicial-page/items/Vector (2).png" alt="Meu Carrinho"></span>
+                <p>Meu Carrinho</p>
+            </div>
+        </div>
+
+        <!-- Menu Hamburguês para Mobile -->
+        <button class="menu-hamburger" id="menuHamburger" aria-label="Abrir menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+    <hr>
+</header>
+
+<!-- Drawer/Sidebar para Mobile -->
+<div class="drawer" id="drawer">
+    <div class="drawer-content">
+        <button class="drawer-close" id="drawerClose">✕</button>
+        <div class="drawer-actions">
+            <div class="drawer-action-item">
+                <span><img src="../../inicial-page/items/Vector.png" alt="Atendimento"></span>
+                <p>Atendimento</p>
+            </div>
+            <div class="drawer-action-item" id="btnMinhaContaDrawer">
+                <span><img src="../../inicial-page/items/Vector (1).png" alt="Minha Conta"></span>
+                <p id="labelMinhaContaDrawer">Minha Conta</p>
+            </div>
+            <div class="drawer-action-item">
+                <span><img src="../../inicial-page/items/Vector (2).png" alt="Meu Carrinho"></span>
+                <p>Meu Carrinho</p>
+            </div>
+            <button class="drawer-action-item theme-toggle" type="button" aria-pressed="false">
+                <span class="theme-icon" aria-hidden="true">🌙</span>
+                <p class="theme-label">Modo escuro</p>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Overlay para fechar drawer ao clicar -->
+<div class="drawer-overlay" id="drawerOverlay"></div>
+
+<nav>
+    <div class="navegacao">
+        <ul>
+            <a href="../../inicial-page/index.html"><span>Inicio</span></a>
+            <span class="nav-link">Catálogo</span>
+            <span class="nav-link">Contato</span>
+        </ul>
+    </div>
+    <hr>
+</nav>
+
+<main class="catalogo-main">
+    <section class="catalogo-hero">
+        <div class="catalogo-hero-content">
+            <h1>Formaturas</h1>
+            <p>O catálogo completo está chegando. Em breve você verá vestidos deslumbrantes para a sua formatura.</p>
+            <a class="catalogo-cta" href="../../inicial-page/index.html">Voltar ao início</a>
+        </div>
+    </section>
+</main>
+
+<!-- Modal para notificações -->
+<div class="modal-notificacao" id="modalNotificacao">
+    <div class="modal-content-notif">
+        <span class="modal-close-notif">&times;</span>
+        <p id="mensagemNotificacao">Em breve!</p>
+    </div>
+</div>
+
+<!-- Modal de Login/Cadastro -->
+<div class="modal-login" id="modalLogin">
+    <div class="modal-login-content">
+        <span class="modal-login-close">&times;</span>
+        <h2 class="modal-login-titulo">Minha Conta</h2>
+        
+        <div class="login-form" id="loginForm">
+            <div class="form-group">
+                <label for="loginEmail">E-mail ou Usuário</label>
+                <input type="text" id="loginEmail" placeholder="Digite seu e-mail ou usuário" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="loginSenha">Senha</label>
+                <input type="password" id="loginSenha" placeholder="Digite sua senha" required>
+            </div>
+            
+            <button class="btn-login" id="btnEntrar">Entrar</button>
+            
+            <div class="login-footer">
+                <p>Bem-vindo! Crie sua conta para aproveitar nossos serviços.</p>
+            </div>
+        </div>
+        
+        <div class="login-logado" id="loginLogado" style="display: none;">
+            <div class="user-info">
+                <div class="user-avatar">👤</div>
+                <p class="user-welcome">Bem-vindo(a),</p>
+                <p class="user-name" id="userName"></p>
+            </div>
+            <button class="btn-logout" id="btnSair">Sair</button>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <p>Made by <a href="https://github.com/CayoLoreti-dev" target="_blank" rel="noopener noreferrer">@cayoloreti-dev</a></p>
+</footer>
+
+<script src="../../inicial-page/script.js" defer></script>
+</body>
+</html>

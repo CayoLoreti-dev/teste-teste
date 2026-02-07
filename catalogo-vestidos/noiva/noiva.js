@@ -241,18 +241,135 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalImg = document.getElementById('imagemModal-img');
   const closeBtn = document.querySelector('.modal-close');
 
-  // Abrir modal ao clicar nas imagens principais
+  // ===== PARTE 2.5: MODAL DE HISTÓRIA DO VESTIDO =====
+  const modalHistoria = document.getElementById('modalHistoria');
+  const modalHistoriaOverlay = document.querySelector('.modal-historia-overlay');
+  const modalHistoriaClose = document.querySelector('.modal-historia-close');
+  const historiaVestidoImg = document.getElementById('historiaVestidoImg');
+  const historiaVestidoTitulo = document.getElementById('historiaVestidoTitulo');
+  const historiaVestidoDescricao = document.getElementById('historiaVestidoDescricao');
+
+  // Dados dos vestidos com suas histórias
+  const vestidosHistorias = {
+    1: {
+      titulo: 'Aurora Clássica',
+      descricao: `
+        <p>O <strong>Aurora Clássica</strong> nasceu da inspiração em manhãs de primavera, quando a luz dourada do sol 
+        toca delicadamente os jardins floridos. Criado pela renomada estilista Maria Valentina, este vestido representa 
+        a perfeição da elegância atemporal.</p>
+        
+        <p>Cada detalhe foi meticulosamente pensado: o corpete em renda francesa importada é adornado com bordados 
+        em pérolas e cristais Swarovski, aplicados à mão por artesãs experientes durante mais de 80 horas de trabalho. 
+        A saia ampla em tule de seda cria um movimento suave e etéreo a cada passo.</p>
+        
+        <p><strong>Ideal para:</strong> Cerimônias em igrejas tradicionais, capelas históricas, fazendas clássicas 
+        e jardins românticos ao ar livre. Este vestido brilha especialmente em casamentos diurnos e ao entardecer, 
+        onde a luz natural realça seus detalhes delicados.</p>
+        
+        <p><strong>Recomendado para:</strong> Noivas que buscam sofisticação e tradição, apreciam a beleza dos 
+        detalhes artesanais e desejam uma silhueta princesa atemporal que ficará linda em fotos para sempre.</p>
+      `
+    },
+    2: {
+      titulo: 'Serenidade Moderna',
+      descricao: `
+        <p>O <strong>Serenidade Moderna</strong> foi desenhado para a noiva contemporânea que valoriza minimalismo 
+        e elegância. Criado pelo atelier Martha Medeiros, este modelo une linhas limpas com tecidos nobres em uma 
+        harmonia perfeita entre simplicidade e luxo.</p>
+        
+        <p>Sua silhueta reta e alongada é confeccionada em cetim duquesa italiano, com um caimento impecável que 
+        valoriza naturalmente a forma do corpo. Os detalhes em renda delicada nas mangas e decote trazem um toque 
+        romântico sem excessos, provando que menos pode ser infinitamente mais.</p>
+        
+        <p><strong>Ideal para:</strong> Casamentos em ambientes urbanos sofisticados como museus, galerias de arte, 
+        rooftops com vista panorâmica, casas de eventos modernas e cerimônias intimistas em restaurantes elegantes.</p>
+        
+        <p><strong>Recomendado para:</strong> Noivas modernas que apreciam design clean, buscam conforto sem abrir 
+        mão da elegância, e desejam um visual contemporâneo que destaque sua beleza natural e personalidade marcante.</p>
+      `
+    },
+    3: {
+      titulo: 'Encanto Romântico',
+      descricao: `
+        <p>O <strong>Encanto Romântico</strong> é uma verdadeira obra de arte criada para celebrar o amor em sua 
+        forma mais pura e delicada. Desenvolvido pelo atelier Luna Novias, este vestido captura a essência dos 
+        contos de fadas e transforma sonhos em realidade.</p>
+        
+        <p>Seu corpete intricado apresenta bordados florais tridimensionais feitos com linha de seda e aplicações 
+        de organza, criando um efeito de jardim encantado. A saia em camadas de tule macio e fluido proporciona 
+        leveza e movimento, enquanto os delicados detalhes em renda Chantilly completam o visual romântico.</p>
+        
+        <p><strong>Ideal para:</strong> Casamentos em jardins floridos, vinícolas românticas, castelos e palacetes 
+        históricos, praias ao pôr do sol e cerimônias em meio à natureza. Perfeito para celebrações onde o romantismo 
+        e a magia são protagonistas.</p>
+        
+        <p><strong>Recomendado para:</strong> Noivas românticas e sonhadoras que desejam um visual de princesa, 
+        apreciam volumes e texturas delicadas, e querem criar uma atmosfera mágica e inesquecível em seu grande dia.</p>
+      `
+    },
+    4: {
+      titulo: 'Majestade Real',
+      descricao: `
+        <p>O <strong>Majestade Real</strong> é a personificação do luxo e da sofisticação máxima. Este vestido 
+        premium foi criado para noivas que desejam fazer uma entrada triunfal e memorável, sendo notado por cada 
+        detalhe de sua magnificência.</p>
+        
+        <p>Confeccionado com os mais nobres tecidos - renda francesa rebordada, tule pontilhado importado e cetim 
+        com acabamento acetinado - este modelo apresenta uma riqueza visual incomparável. O corpete estruturado 
+        é coberto por aplicações de cristais austríacos e pérolas naturais dispostos em padrões geométricos que 
+        capturam e refletem a luz magnificamente.</p>
+        
+        <p><strong>Ideal para:</strong> Grandes celebrações em salões de festas luxuosos, palácios, mansões históricas, 
+        hotéis cinco estrelas e catedrais imponentes. Este vestido foi feito para espaços grandiosos que complementam 
+        sua presença majestosa.</p>
+        
+        <p><strong>Recomendado para:</strong> Noivas que sonham com uma cerimônia grandiosa, não temem ser o centro 
+        das atenções, apreciam o máximo em luxo e detalhamento, e desejam criar um momento cinematográfico que será 
+        lembrado por gerações.</p>
+      `
+    }
+  };
+
+  // Abrir modal de história ao clicar nas imagens principais
   if (vestidosContainer) {
-    vestidosContainer.querySelectorAll('img').forEach(img => {
-      img.addEventListener('click', (e) => {
-        modal.classList.add('show');
-        modalImg.src = e.target.src;
-        document.body.style.overflow = 'hidden';
+    vestidosContainer.querySelectorAll('[data-vestido]').forEach(vestidoEl => {
+      vestidoEl.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const vestidoId = vestidoEl.getAttribute('data-vestido');
+        const vestidoData = vestidosHistorias[vestidoId];
+        const imgSrc = vestidoEl.querySelector('img').src;
+
+        if (vestidoData) {
+          historiaVestidoImg.src = imgSrc;
+          historiaVestidoTitulo.textContent = vestidoData.titulo;
+          historiaVestidoDescricao.innerHTML = vestidoData.descricao;
+          
+          modalHistoria.classList.add('show');
+          document.body.style.overflow = 'hidden';
+        }
       });
     });
   }
 
-  // Abrir modal ao clicar nas imagens do carrossel
+  // Fechar modal de história
+  const closeModalHistoria = () => {
+    modalHistoria.classList.remove('show');
+    setTimeout(() => {
+      document.body.style.overflow = 'auto';
+    }, 600);
+  };
+
+  modalHistoriaClose?.addEventListener('click', closeModalHistoria);
+  modalHistoriaOverlay?.addEventListener('click', closeModalHistoria);
+
+  // Fechar modal de história com ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modalHistoria.classList.contains('show')) {
+      closeModalHistoria();
+    }
+  });
+
+  // Abrir modal fullscreen ao clicar nas imagens do carrossel (comportamento original mantido)
   document.querySelectorAll('.carrossel img').forEach(img => {
     img.addEventListener('click', (e) => {
       modal.classList.add('show');

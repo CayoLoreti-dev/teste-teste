@@ -1,0 +1,69 @@
+@import url("../noiva/noiva.css");
+
+/* Ajustes específicos para a página de madrinhas */
+.catalogo-main {
+	min-height: 60vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 4rem 2rem 6rem;
+}
+
+.catalogo-hero {
+	width: 100%;
+	max-width: 960px;
+	text-align: center;
+	padding: 3rem 2.5rem;
+	border-radius: 20px;
+	background: linear-gradient(135deg, rgba(119, 51, 59, 0.12) 0%, rgba(230, 190, 138, 0.12) 100%);
+	box-shadow: 0 16px 40px rgba(119, 51, 59, 0.15);
+	border: 1px solid rgba(230, 190, 138, 0.25);
+}
+
+.catalogo-hero h1 {
+	font-family: 'Cormorant Garamond', serif;
+	font-size: 2.8rem;
+	color: #77333b;
+	margin-bottom: 1rem;
+	letter-spacing: 1.5px;
+}
+
+.catalogo-hero p {
+	font-size: 1.05rem;
+	line-height: 1.7;
+	color: rgba(119, 51, 59, 0.8);
+	margin-bottom: 2rem;
+}
+
+.catalogo-cta {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.9rem 2.2rem;
+	border-radius: 999px;
+	background: linear-gradient(135deg, #c6956b 0%, #e6be8a 100%);
+	color: #fff;
+	font-weight: 600;
+	letter-spacing: 0.8px;
+	text-decoration: none;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	box-shadow: 0 10px 26px rgba(198, 149, 107, 0.35);
+}
+
+.catalogo-cta:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 14px 32px rgba(198, 149, 107, 0.45);
+}
+
+body[data-theme="dark"] .catalogo-hero {
+	background: linear-gradient(135deg, rgba(20, 12, 15, 0.8) 0%, rgba(30, 18, 22, 0.85) 100%);
+	border-color: rgba(230, 190, 138, 0.2);
+}
+
+body[data-theme="dark"] .catalogo-hero h1 {
+	color: #f2e7df;
+}
+
+body[data-theme="dark"] .catalogo-hero p {
+	color: rgba(242, 231, 223, 0.7);
+}

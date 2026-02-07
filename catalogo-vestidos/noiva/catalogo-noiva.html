@@ -96,20 +96,20 @@
 <main>
     <div class="vestidos">
 
-    <div class="vestido-1">
+    <div class="vestido-1" data-vestido="1">
         <img src="https://centernoivas.com.br/wp-content/uploads/2025/04/TE003-FRENTE.jpg" alt="Vestido de noiva 1">
     </div>
 
-    <div class="vestido-2">
+    <div class="vestido-2" data-vestido="2">
         <img src="https://marthamedeiros.com.br/cdn/shop/files/Copia-de-M_Medeiros_maio2024-22.jpg?v=1726152017&width=1000" alt="Vestido de noiva 2">
     </div>
 
-    <div class="vestido-3">
+    <div class="vestido-3" data-vestido="3">
         <img src="https://casamarela.com/wp-content/uploads/2024/03/8W13_POLONIA_LUNA_NOVIAS_2.jpg
 " alt="Vestido de noiva 3">
     </div>
 
-    <div class="vestido-4">
+    <div class="vestido-4" data-vestido="4">
     <img src="https://cdn.awsli.com.br/2500x2500/2137/2137091/produto/226795913/vestido-de-noiva-raridade-premium-em-renda-e-tule-poa-b8741fa8-j7pifrpnx7.jpg
     " alt="Vestido de noiva 4">
     </div>
@@ -152,6 +152,21 @@
 <div class="modal" id="imagemModal">
     <span class="modal-close">&times;</span>
     <img class="modal-content" id="imagemModal-img" src="" alt="">
+</div>
+
+<!-- Modal de História do Vestido -->
+<div class="modal-historia" id="modalHistoria">
+    <div class="modal-historia-overlay"></div>
+    <div class="modal-historia-content">
+        <div class="modal-historia-imagem">
+            <img id="historiaVestidoImg" src="" alt="">
+        </div>
+        <div class="modal-historia-texto">
+            <button class="modal-historia-close" aria-label="Fechar">&times;</button>
+            <h2 id="historiaVestidoTitulo"></h2>
+            <div id="historiaVestidoDescricao"></div>
+        </div>
+    </div>
 </div>
 
 <!-- Modal para notificações -->
