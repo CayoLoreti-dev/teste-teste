@@ -872,6 +872,26 @@ body[data-theme="dark"] .card-categoria:hover {
 }
 
 /* 10. RESPONSIVIDADE */
+@media (max-width: 1030px) {
+    .imagens-noiva {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        justify-items: center;
+        gap: 1.2rem;
+    }
+
+    .imagens-noiva div {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .imagens-noiva img {
+        width: 100%;
+        max-width: 320px;
+    }
+}
+
 @media (max-width: 1024px) {
     .navbar {
         padding: 10px 25px;
