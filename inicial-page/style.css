@@ -1083,6 +1083,8 @@ body[data-theme="dark"] .card-categoria:hover {
     }
 
     .imagens-noiva {
+        display: grid;
+        grid-template-columns: 1fr;
         gap: 0.8rem;
         padding: 30px 0.5rem 50px;
         align-items: center;
