@@ -10,74 +10,9 @@
 	<title>Catálogo Madrinhas - SSISSI</title>
 </head>
 <body>
-<header class="topo">
-	<div class="pix">
-		<p>Pagamento em pix 10% de desconto</p>
-	</div>
-	<hr>
-	<div class="navbar">
-		<button class="theme-toggle-left" type="button" aria-pressed="false">
-			<span class="theme-icon" aria-hidden="true">🌙</span>
-			<p class="theme-label">Modo escuro</p>
-		</button>
 
-		<div class="logo"></div>
-
-		<div class="titulo">
-			<p class="cursor typewriter-animation">Madrinhas</p>
-		</div>
-
-		<div class="actions">
-			<div class="action-item">
-				<span><img src="../../assets/icons/vector.png" alt="Atendimento"></span>
-				<p>Atendimento</p>
-			</div>
-
-			<div class="action-item" id="btnMinhaConta">
-				<span><img src="../../assets/icons/vector-1.png" alt="Minha Conta"></span>
-				<p id="labelMinhaConta">Minha Conta</p>
-			</div>
-
-			<div class="action-item">
-				<span><img src="../../assets/icons/vector-2.png" alt="Meu Carrinho"></span>
-				<p>Meu Carrinho</p>
-			</div>
-		</div>
-
-		<!-- Menu Hamburguês para Mobile -->
-		<button class="menu-hamburger" id="menuHamburger" aria-label="Abrir menu">
-			<span></span>
-			<span></span>
-			<span></span>
-		</button>
-	</div>
-	<hr>
-</header>
-
-<!-- Drawer/Sidebar para Mobile -->
-<div class="drawer" id="drawer">
-	<div class="drawer-content">
-		<button class="drawer-close" id="drawerClose">✕</button>
-		<div class="drawer-actions">
-			<div class="drawer-action-item">
-				<span><img src="../../assets/icons/vector.png" alt="Atendimento"></span>
-				<p>Atendimento</p>
-			</div>
-			<div class="drawer-action-item" id="btnMinhaContaDrawer">
-				<span><img src="../../assets/icons/vector-1.png" alt="Minha Conta"></span>
-				<p id="labelMinhaContaDrawer">Minha Conta</p>
-			</div>
-			<div class="drawer-action-item">
-				<span><img src="../../assets/icons/vector-2.png" alt="Meu Carrinho"></span>
-				<p>Meu Carrinho</p>
-			</div>
-			<button class="drawer-action-item theme-toggle" type="button" aria-pressed="false">
-				<span class="theme-icon" aria-hidden="true">🌙</span>
-				<p class="theme-label">Modo escuro</p>
-			</button>
-		</div>
-	</div>
-</div>
+<!-- Header será injetado por JavaScript -->
+<div id="header-placeholder"></div>
 
 <!-- Overlay para fechar drawer ao clicar -->
 <div class="drawer-overlay" id="drawerOverlay"></div>
@@ -103,53 +38,25 @@
 	</section>
 </main>
 
-<!-- Modal para notificações -->
-<div class="modal-notificacao" id="modalNotificacao">
-	<div class="modal-content-notif">
-		<span class="modal-close-notif">&times;</span>
-		<p id="mensagemNotificacao">Em breve!</p>
-	</div>
-</div>
-
-<!-- Modal de Login/Cadastro -->
-<div class="modal-login" id="modalLogin">
-	<div class="modal-login-content">
-		<span class="modal-login-close">&times;</span>
-		<h2 class="modal-login-titulo">Minha Conta</h2>
-        
-		<div class="login-form" id="loginForm">
-			<div class="form-group">
-				<label for="loginEmail">E-mail ou Usuário</label>
-				<input type="text" id="loginEmail" placeholder="Digite seu e-mail ou usuário" required>
-			</div>
-            
-			<div class="form-group">
-				<label for="loginSenha">Senha</label>
-				<input type="password" id="loginSenha" placeholder="Digite sua senha" required>
-			</div>
-            
-			<button class="btn-login" id="btnEntrar">Entrar</button>
-            
-			<div class="login-footer">
-				<p>Bem-vindo! Crie sua conta para aproveitar nossos serviços.</p>
-			</div>
-		</div>
-        
-		<div class="login-logado" id="loginLogado" style="display: none;">
-			<div class="user-info">
-				<div class="user-avatar">👤</div>
-				<p class="user-welcome">Bem-vindo(a),</p>
-				<p class="user-name" id="userName"></p>
-			</div>
-			<button class="btn-logout" id="btnSair">Sair</button>
-		</div>
-	</div>
-</div>
+<!-- Modals compartilhados (login, notificação) serão injetados por JavaScript -->
+<div id="modals-placeholder"></div>
 
 <footer class="footer">
 	<p>Made by <a href="https://github.com/CayoLoreti-dev" target="_blank" rel="noopener noreferrer">@cayoloreti-dev</a></p>
 </footer>
 
-<script src="../../inicial-page/script.js" defer></script>
+<!-- Scripts dos componentes compartilhados -->
+<script src="../../components/header.js"></script>
+<script src="../../components/auth.js"></script>
+<script src="../../components/modals.js"></script>
+<script>
+	// Inicializa o header e modals desta página
+	initHeader('Madrinhas', true); // true = é página de catálogo (caminho relativo diferente)
+	initModals();
+</script>
+
+<!-- Script comum para funcionalidades compartilhadas (modo escuro, menu, etc.) -->
+<script src="../../components/app.js"></script>
+
 </body>
 </html>
