@@ -65,6 +65,137 @@ document.addEventListener('DOMContentLoaded', () => {
 
   updateThemeToggles();
 
+  // ===== 0.2. MODAL DE LOGIN/CADASTRO =====
+  const modalLogin = document.getElementById('modalLogin');
+  const btnMinhaConta = document.getElementById('btnMinhaConta');
+  const btnMinhaContaDrawer = document.getElementById('btnMinhaContaDrawer');
+  const labelMinhaConta = document.getElementById('labelMinhaConta');
+  const labelMinhaContaDrawer = document.getElementById('labelMinhaContaDrawer');
+  const modalLoginClose = document.querySelector('.modal-login-close');
+  const loginForm = document.getElementById('loginForm');
+  const loginLogado = document.getElementById('loginLogado');
+  const btnEntrar = document.getElementById('btnEntrar');
+  const btnSair = document.getElementById('btnSair');
+  const loginEmail = document.getElementById('loginEmail');
+  const loginSenha = document.getElementById('loginSenha');
+  const userName = document.getElementById('userName');
+
+  // Verificar se já está logado
+  const checkLogin = () => {
+    const userData = localStorage.getItem('userData');
+    if (userData) {
+      const user = JSON.parse(userData);
+      labelMinhaConta.textContent = user.name;
+      if (labelMinhaContaDrawer) labelMinhaContaDrawer.textContent = user.name;
+      return true;
+    }
+    return false;
+  };
+
+  // Abrir modal de login
+  const openLoginModal = () => {
+    modalLogin.classList.add('show');
+    const isLoggedIn = checkLogin();
+    
+    // Fechar drawer se estiver aberto
+    const drawer = document.getElementById('drawer');
+    const menuHamburger = document.getElementById('menuHamburger');
+    if (drawer && drawer.classList.contains('open')) {
+      menuHamburger?.classList.remove('active');
+      drawer.classList.remove('open');
+    }
+    
+    if (isLoggedIn) {
+      const user = JSON.parse(localStorage.getItem('userData'));
+      loginForm.style.display = 'none';
+      loginLogado.style.display = 'flex';
+      userName.textContent = user.name;
+    } else {
+      loginForm.style.display = 'flex';
+      loginLogado.style.display = 'none';
+    }
+  };
+
+  // Fechar modal de login
+  const closeLoginModal = () => {
+    modalLogin.classList.remove('show');
+    loginEmail.value = '';
+    loginSenha.value = '';
+  };
+
+  // Fazer login
+  const handleLogin = (e) => {
+    e.preventDefault();
+    
+    const email = loginEmail.value.trim();
+    const senha = loginSenha.value.trim();
+    
+    if (!email || !senha) {
+      alert('Por favor, preencha todos os campos!');
+      return;
+    }
+    
+    // Extrair nome do email ou usar como nome de usuário
+    let name = email.split('@')[0];
+    name = name.charAt(0).toUpperCase() + name.slice(1);
+    
+    // Salvar dados do usuário
+    const userData = {
+      email: email,
+      name: name
+    };
+    
+    localStorage.setItem('userData', JSON.stringify(userData));
+    
+    // Atualizar interface
+    labelMinhaConta.textContent = name;
+    if (labelMinhaContaDrawer) labelMinhaContaDrawer.textContent = name;
+    userName.textContent = name;
+    
+    // Mostrar tela de logado
+    loginForm.style.display = 'none';
+    loginLogado.style.display = 'flex';
+  };
+
+  // Fazer logout
+  const handleLogout = () => {
+    localStorage.removeItem('userData');
+    labelMinhaConta.textContent = 'Minha Conta';
+    if (labelMinhaContaDrawer) labelMinhaContaDrawer.textContent = 'Minha Conta';
+    closeLoginModal();
+  };
+
+  // Event listeners
+  btnMinhaConta?.addEventListener('click', openLoginModal);
+  btnMinhaContaDrawer?.addEventListener('click', openLoginModal);
+  modalLoginClose?.addEventListener('click', closeLoginModal);
+  btnEntrar?.addEventListener('click', handleLogin);
+  btnSair?.addEventListener('click', handleLogout);
+
+  // Fechar modal clicando fora
+  modalLogin?.addEventListener('click', (e) => {
+    if (e.target === modalLogin) {
+      closeLoginModal();
+    }
+  });
+
+  // Fechar com ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modalLogin.classList.contains('show')) {
+      closeLoginModal();
+    }
+  });
+
+  // Enter para fazer login
+  loginSenha?.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      handleLogin(e);
+    }
+  });
+
+  // Verificar login ao carregar
+  checkLogin();
+
   // Abrir modal nos links de navegação
   navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
@@ -84,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Ações do topo (Atendimento, Conta, Carrinho)
   document.querySelectorAll('.action-item').forEach(item => {
     item.addEventListener('click', () => {
-      if (item.classList.contains('theme-toggle')) return;
+      if (item.classList.contains('theme-toggle') || item.classList.contains('theme-toggle-left') || item.id === 'btnMinhaConta') return;
       showNotifyModal('Funcionalidade em desenvolvimento!');
     });
   });
@@ -405,7 +536,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Fechar drawer ao clicar em um item
   drawerActionItems.forEach(item => {
     item.addEventListener('click', () => {
-      if (item.classList.contains('theme-toggle')) return;
+      if (item.classList.contains('theme-toggle') || item.id === 'btnMinhaContaDrawer') return;
       menuHamburger.classList.remove('active');
       drawer.classList.remove('open');
 

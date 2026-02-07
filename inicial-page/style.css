@@ -1149,3 +1149,270 @@ body[data-theme="dark"] .footer a {
 body[data-theme="dark"] .footer a:hover {
     color: #e6be8a;
 }
+
+/* 13. MODAL DE LOGIN */
+.modal-login {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-login.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-login-content {
+    background: linear-gradient(135deg, #faf8f3 0%, #f4ede2 100%);
+    margin: auto;
+    padding: 2.5rem;
+    border: 2px solid rgba(230, 190, 138, 0.4);
+    border-radius: 20px;
+    width: 90%;
+    max-width: 450px;
+    box-shadow: 0 20px 60px rgba(119, 51, 59, 0.3);
+    position: relative;
+    animation: slideDown 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modal-login-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: #77333b;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.modal-login-close:hover {
+    background: rgba(230, 190, 138, 0.3);
+    transform: rotate(90deg) scale(1.1);
+}
+
+.modal-login-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    color: #77333b;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    color: #77333b;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.form-group input {
+    padding: 0.9rem 1.2rem;
+    border: 2px solid rgba(230, 190, 138, 0.4);
+    border-radius: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.8);
+    color: #77333b;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #e6be8a;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(230, 190, 138, 0.3);
+}
+
+.form-group input::placeholder {
+    color: rgba(119, 51, 59, 0.5);
+}
+
+.btn-login {
+    background: linear-gradient(135deg, #c6956b 0%, #e6be8a 100%);
+    color: #fff;
+    border: none;
+    padding: 1rem;
+    border-radius: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+    box-shadow: 0 6px 20px rgba(198, 149, 107, 0.4);
+}
+
+.btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(198, 149, 107, 0.5);
+    background: linear-gradient(135deg, #e6be8a 0%, #c6956b 100%);
+}
+
+.btn-login:active {
+    transform: translateY(0);
+}
+
+.login-footer {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.login-footer p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    color: rgba(119, 51, 59, 0.7);
+    line-height: 1.5;
+}
+
+/* Estado logado */
+.login-logado {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.user-info {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.user-avatar {
+    font-size: 4rem;
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, rgba(230, 190, 138, 0.3), rgba(198, 149, 107, 0.3));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid rgba(230, 190, 138, 0.5);
+}
+
+.user-welcome {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    color: rgba(119, 51, 59, 0.7);
+    margin: 0;
+}
+
+.user-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    color: #77333b;
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+.btn-logout {
+    background: linear-gradient(135deg, #77333b 0%, #5a2630 100%);
+    color: #fff;
+    border: none;
+    padding: 0.9rem 2.5rem;
+    border-radius: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+    box-shadow: 0 6px 20px rgba(119, 51, 59, 0.3);
+}
+
+.btn-logout:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(119, 51, 59, 0.4);
+    background: linear-gradient(135deg, #5a2630 0%, #77333b 100%);
+}
+
+/* Modo escuro */
+body[data-theme="dark"] .modal-login-content {
+    background: linear-gradient(135deg, #1a1317 0%, #120c0f 100%);
+    border-color: rgba(230, 190, 138, 0.3);
+}
+
+body[data-theme="dark"] .modal-login-titulo {
+    color: #f0e7df;
+}
+
+body[data-theme="dark"] .modal-login-close {
+    color: #f0e7df;
+}
+
+body[data-theme="dark"] .form-group label {
+    color: #f0e7df;
+}
+
+body[data-theme="dark"] .form-group input {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(230, 190, 138, 0.3);
+    color: #f0e7df;
+}
+
+body[data-theme="dark"] .form-group input::placeholder {
+    color: rgba(240, 231, 223, 0.4);
+}
+
+body[data-theme="dark"] .form-group input:focus {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: #e6be8a;
+}
+
+body[data-theme="dark"] .login-footer p {
+    color: rgba(240, 231, 223, 0.6);
+}
+
+body[data-theme="dark"] .user-name,
+body[data-theme="dark"] .user-welcome {
+    color: #f0e7df;
+}
+
+body[data-theme="dark"] .user-welcome {
+    color: rgba(240, 231, 223, 0.7);
+}

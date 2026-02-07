@@ -33,9 +33,9 @@
                 <p>Atendimento</p>
             </div>
 
-            <div class="action-item">
+            <div class="action-item" id="btnMinhaConta">
                 <span><img src="./items/Vector (1).png" alt="Minha Conta"></span>
-                <p>Minha Conta</p>
+                <p id="labelMinhaConta">Minha Conta</p>
             </div>
 
             <div class="action-item">
@@ -63,9 +63,9 @@
                 <span><img src="./items/Vector.png" alt="Atendimento"></span>
                 <p>Atendimento</p>
             </div>
-            <div class="drawer-action-item">
+            <div class="drawer-action-item" id="btnMinhaContaDrawer">
                 <span><img src="./items/Vector (1).png" alt="Minha Conta"></span>
-                <p>Minha Conta</p>
+                <p id="labelMinhaContaDrawer">Minha Conta</p>
             </div>
             <div class="drawer-action-item">
                 <span><img src="./items/Vector (2).png" alt="Meu Carrinho"></span>
@@ -142,6 +142,41 @@
     <div class="modal-content-notif">
         <span class="modal-close-notif">&times;</span>
         <p id="mensagemNotificacao">Em breve!</p>
+    </div>
+</div>
+
+<!-- Modal de Login/Cadastro -->
+<div class="modal-login" id="modalLogin">
+    <div class="modal-login-content">
+        <span class="modal-login-close">&times;</span>
+        <h2 class="modal-login-titulo">Minha Conta</h2>
+        
+        <div class="login-form" id="loginForm">
+            <div class="form-group">
+                <label for="loginEmail">E-mail ou Usuário</label>
+                <input type="text" id="loginEmail" placeholder="Digite seu e-mail ou usuário" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="loginSenha">Senha</label>
+                <input type="password" id="loginSenha" placeholder="Digite sua senha" required>
+            </div>
+            
+            <button class="btn-login" id="btnEntrar">Entrar</button>
+            
+            <div class="login-footer">
+                <p>Bem-vindo! Crie sua conta para aproveitar nossos serviços.</p>
+            </div>
+        </div>
+        
+        <div class="login-logado" id="loginLogado" style="display: none;">
+            <div class="user-info">
+                <div class="user-avatar">👤</div>
+                <p class="user-welcome">Bem-vindo(a),</p>
+                <p class="user-name" id="userName"></p>
+            </div>
+            <button class="btn-logout" id="btnSair">Sair</button>
+        </div>
     </div>
 </div>
 
