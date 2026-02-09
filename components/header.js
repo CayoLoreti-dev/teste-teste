@@ -28,15 +28,15 @@ function getHeaderHTML(pageTitle = 'Bem-Vinda(o)') {
 
         <div class="actions">
           <div class="action-item">
-            <span><img src="./assets/icons/vector.png" alt="Atendimento"></span>
+            <span><img src="./assets/icons/vector.webp" alt="Atendimento"></span>
             <p>Atendimento</p>
           </div>
           <div class="action-item" id="btnMinhaConta">
-            <span><img src="./assets/icons/vector-1.png" alt="Minha Conta"></span>
+            <span><img src="./assets/icons/vector-1.webp" alt="Minha Conta"></span>
             <p id="labelMinhaConta">Minha Conta</p>
           </div>
           <div class="action-item">
-            <span><img src="./assets/icons/vector-2.png" alt="Meu Carrinho"></span>
+            <span><img src="./assets/icons/vector-2.webp" alt="Meu Carrinho"></span>
             <p>Meu Carrinho</p>
           </div>
         </div>
@@ -57,15 +57,15 @@ function getHeaderHTML(pageTitle = 'Bem-Vinda(o)') {
         <button class="drawer-close" id="drawerClose">✕</button>
         <div class="drawer-actions">
           <div class="drawer-action-item">
-            <span><img src="./assets/icons/vector.png" alt="Atendimento"></span>
+            <span><img src="./assets/icons/vector.webp" alt="Atendimento"></span>
             <p>Atendimento</p>
           </div>
           <div class="drawer-action-item" id="btnMinhaContaDrawer">
-            <span><img src="./assets/icons/vector-1.png" alt="Minha Conta"></span>
+            <span><img src="./assets/icons/vector-1.webp" alt="Minha Conta"></span>
             <p id="labelMinhaContaDrawer">Minha Conta</p>
           </div>
           <div class="drawer-action-item">
-            <span><img src="./assets/icons/vector-2.png" alt="Meu Carrinho"></span>
+            <span><img src="./assets/icons/vector-2.webp" alt="Meu Carrinho"></span>
             <p>Meu Carrinho</p>
           </div>
           <button class="drawer-action-item theme-toggle" type="button" aria-pressed="false">
@@ -115,15 +115,15 @@ function getHeaderHTMLForCatalog(pageTitle = 'Catálogo') {
 
         <div class="actions">
           <div class="action-item">
-            <span><img src="../../assets/icons/vector.png" alt="Atendimento"></span>
+            <span><img src="../../assets/icons/vector.webp" alt="Atendimento"></span>
             <p>Atendimento</p>
           </div>
           <div class="action-item" id="btnMinhaConta">
-            <span><img src="../../assets/icons/vector-1.png" alt="Minha Conta"></span>
+            <span><img src="../../assets/icons/vector-1.webp" alt="Minha Conta"></span>
             <p id="labelMinhaConta">Minha Conta</p>
           </div>
           <div class="action-item">
-            <span><img src="../../assets/icons/vector-2.png" alt="Meu Carrinho"></span>
+            <span><img src="../../assets/icons/vector-2.webp" alt="Meu Carrinho"></span>
             <p>Meu Carrinho</p>
           </div>
         </div>
@@ -144,15 +144,15 @@ function getHeaderHTMLForCatalog(pageTitle = 'Catálogo') {
         <button class="drawer-close" id="drawerClose">✕</button>
         <div class="drawer-actions">
           <div class="drawer-action-item">
-            <span><img src="../../assets/icons/vector.png" alt="Atendimento"></span>
+            <span><img src="../../assets/icons/vector.webp" alt="Atendimento"></span>
             <p>Atendimento</p>
           </div>
           <div class="drawer-action-item" id="btnMinhaContaDrawer">
-            <span><img src="../../assets/icons/vector-1.png" alt="Minha Conta"></span>
+            <span><img src="../../assets/icons/vector-1.webp" alt="Minha Conta"></span>
             <p id="labelMinhaContaDrawer">Minha Conta</p>
           </div>
           <div class="drawer-action-item">
-            <span><img src="../../assets/icons/vector-2.png" alt="Meu Carrinho"></span>
+            <span><img src="../../assets/icons/vector-2.webp" alt="Meu Carrinho"></span>
             <p>Meu Carrinho</p>
           </div>
           <button class="drawer-action-item theme-toggle" type="button" aria-pressed="false">
