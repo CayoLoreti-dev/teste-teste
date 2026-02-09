@@ -1757,6 +1757,57 @@ body[data-theme="dark"] .modal-historia-texto::-webkit-scrollbar-thumb:hover {
 
     .cursor {
         border-right: none;
+        width: auto;
+        max-width: 90vw;
+        white-space: normal;
+        overflow: visible;
+        text-align: center;
+        line-height: 1.1;
+    }
+
+    .titulo {
+        width: 100%;
+        height: auto;
+        padding: 0.2rem 0;
+    }
+}
+
+@media (max-width: 420px) {
+    .cursor {
+        font-size: 1.05rem;
+        letter-spacing: 1px;
+    }
+
+    .navbar {
+        min-height: 48px;
+        padding: 6px 8px;
+    }
+
+    .titulo {
+        height: auto;
+        padding: 0.1rem 0;
+    }
+
+    .menu-hamburger {
+        padding: 6px;
+        gap: 5px;
+    }
+
+    .menu-hamburger span {
+        width: 22px;
+        height: 2px;
+    }
+
+    .theme-toggle-left {
+        min-width: 52px;
+    }
+
+    .theme-toggle-left .theme-icon {
+        font-size: 16px;
+    }
+
+    .theme-toggle-left .theme-label {
+        font-size: 8px;
     }
 }
 

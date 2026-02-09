@@ -125,6 +125,37 @@ Isso significa que **editar o header, login ou modais em um lugar atualiza em to
 - Depois, veja `inicial-page/style.css` para o visual principal.
 - Em seguida, compare `noiva.css` com `formatura/style.css` para entender como o tema é reaproveitado.
 
+## Trilha de alterações (Git)
+
+Registro resumido para estudo, do mais recente ao mais antigo (hash + mensagem):
+
+- `c58ee91` — perf: converter formatura para webp
+- `75e7d71` — perf: otimizar imagens e cache
+- `cb6cde5` — chore: otimizar imagens restantes para webp
+- `554c851` — chore: limpar páginas e otimizar imagens noiva
+- `69b6793` — fix: corrigir menu mobile e carrossel noivas
+- `ca76022` — feat: animar drawer e melhorar acessibilidade
+- `18b2b2e` — feat: animar overlay e travar scroll no menu
+- `3c52ac7` — fix: corrigir menu mobile
+- `4e0a14c` — feat: adicionar modal de configurações de cookies
+- `d80bb91` — feat: armazenar preferências em cookies
+- `dfe5bd9` — feat: sincronizar tema entre páginas
+- `1a0f92d` — perf: adicionar WebP com fallback
+- `2738a93` — perf: otimizar preload e animações em touch
+- `b065a7c` — perf: reduzir efeitos pesados no mobile
+- `73f1042` — perf: otimizar renderização de seções
+- `9b43141` — perf: separar cookies e otimizar carregamento
+- `d6bbe47` — feat: aplicar consentimento em login e tema
+- `8ad810f` — fix: corrige navbar duplicada, tema e adiciona barra de cookies
+- `1a29202` — Adiciona README de apresentação e de estudo
+- `0e285b3` — Ajusta layout mobile da área inicial
+
+## Diário de bordo (para estudo contínuo)
+
+> Aqui eu registro de forma resumida o que foi feito em cada sessão. A ideia é facilitar revisões futuras.
+
+- **09/02/2026** — Imagens compactadas e convertidas para WebP (q=75); referências atualizadas em HTML/JS; melhorias premium na página de Formatura (badge, highlights e callout VIP); correção do modo escuro no body da Formatura; trilha do Git registrada neste documento.
+
 ---
 
 Se quiser, posso adicionar comentários no HTML/CSS ou preparar um checklist para novos projetos.

@@ -1,9 +1,37 @@
 @import url("../noiva/noiva.css");
 
 /* Ajustes específicos para a página de formatura */
+body.formatura-page {
+	background: radial-gradient(circle at top, rgba(230, 190, 138, 0.25), transparent 55%),
+		linear-gradient(135deg, #fff7f0 0%, #f2e4d6 50%, #fff7f0 100%);
+	box-shadow: inset 0 0 120px rgba(119, 51, 59, 0.08);
+}
+
+body.formatura-page[data-theme="dark"] {
+	background: radial-gradient(circle at top, rgba(230, 190, 138, 0.12), transparent 55%),
+		linear-gradient(135deg, #120c0f 0%, #1b1417 50%, #120c0f 100%);
+	box-shadow: inset 0 0 140px rgba(0, 0, 0, 0.6);
+}
+
 .formatura-destaques {
 	gap: 20px;
 	padding-top: 2.8rem;
+}
+
+body.formatura-page .vestidos {
+	background: linear-gradient(135deg, rgba(119, 51, 59, 0.06) 0%, rgba(230, 190, 138, 0.12) 100%);
+}
+
+body.formatura-page[data-theme="dark"] .vestidos {
+	background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0.22) 100%);
+}
+
+body.formatura-page .vestidos::before {
+	background: radial-gradient(circle, rgba(119, 51, 59, 0.12), transparent 70%);
+}
+
+body.formatura-page[data-theme="dark"] .vestidos::before {
+	background: radial-gradient(circle, rgba(230, 190, 138, 0.08), transparent 70%);
 }
 
 .formatura-destaques img {
@@ -48,6 +76,40 @@
 	background: linear-gradient(135deg, rgba(119, 51, 59, 0.12) 0%, rgba(230, 190, 138, 0.12) 100%);
 	box-shadow: 0 16px 40px rgba(119, 51, 59, 0.15);
 	border: 1px solid rgba(230, 190, 138, 0.25);
+	position: relative;
+	overflow: hidden;
+}
+
+.catalogo-hero::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: radial-gradient(circle at top right, rgba(230, 190, 138, 0.3), transparent 55%);
+	opacity: 0.8;
+	pointer-events: none;
+}
+
+.catalogo-hero-content {
+	position: relative;
+	z-index: 1;
+}
+
+.formatura-badge {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	padding: 0.35rem 1rem;
+	border-radius: 999px;
+	font-size: 0.85rem;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	font-weight: 600;
+	color: #77333b;
+	background: rgba(255, 255, 255, 0.7);
+	border: 1px solid rgba(119, 51, 59, 0.2);
+	box-shadow: 0 8px 20px rgba(119, 51, 59, 0.12);
+	margin-bottom: 1rem;
 }
 
 .catalogo-hero h1 {
@@ -63,6 +125,46 @@
 	line-height: 1.7;
 	color: rgba(119, 51, 59, 0.8);
 	margin-bottom: 2rem;
+}
+
+.formatura-highlights {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.8rem;
+	justify-content: center;
+	margin: 0 0 2rem;
+}
+
+.formatura-highlights span {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.4rem 1rem;
+	border-radius: 999px;
+	background: rgba(119, 51, 59, 0.08);
+	color: #77333b;
+	font-size: 0.9rem;
+	font-weight: 500;
+}
+
+.formatura-premium {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.6rem 1rem;
+	justify-content: center;
+	margin-bottom: 2.2rem;
+	padding: 1rem 1.5rem;
+	border-radius: 16px;
+	background: rgba(255, 255, 255, 0.65);
+	border: 1px solid rgba(230, 190, 138, 0.35);
+	box-shadow: 0 14px 30px rgba(119, 51, 59, 0.12);
+	backdrop-filter: blur(6px);
+}
+
+.formatura-premium span {
+	font-size: 0.95rem;
+	color: rgba(119, 51, 59, 0.9);
+	font-weight: 600;
 }
 
 .catalogo-cta {
@@ -90,12 +192,37 @@ body[data-theme="dark"] .catalogo-hero {
 	border-color: rgba(230, 190, 138, 0.2);
 }
 
+body[data-theme="dark"] .catalogo-hero::before {
+	background: radial-gradient(circle at top right, rgba(230, 190, 138, 0.15), transparent 55%);
+}
+
 body[data-theme="dark"] .catalogo-hero h1 {
 	color: #f2e7df;
 }
 
 body[data-theme="dark"] .catalogo-hero p {
 	color: rgba(242, 231, 223, 0.7);
+}
+
+body[data-theme="dark"] .formatura-badge {
+	color: #f2e7df;
+	background: rgba(20, 12, 15, 0.7);
+	border-color: rgba(230, 190, 138, 0.25);
+}
+
+body[data-theme="dark"] .formatura-highlights span {
+	background: rgba(230, 190, 138, 0.12);
+	color: #f2e7df;
+}
+
+body[data-theme="dark"] .formatura-premium {
+	background: rgba(20, 12, 15, 0.75);
+	border-color: rgba(230, 190, 138, 0.25);
+	box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
+}
+
+body[data-theme="dark"] .formatura-premium span {
+	color: #f2e7df;
 }
 
 @media (prefers-reduced-motion: reduce) {
