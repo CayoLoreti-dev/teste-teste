@@ -335,6 +335,8 @@ nav {
     padding: 80px 2rem 100px;
     position: relative;
     flex-wrap: wrap;
+    content-visibility: auto;
+    contain-intrinsic-size: 900px 600px;
 }
 
 .imagens-noiva div {

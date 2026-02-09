@@ -540,6 +540,8 @@ body[data-theme="dark"] .drawer-action-item p {
     background: linear-gradient(135deg, rgba(230,190,138,0.08) 0%, rgba(119,51,59,0.04) 100%);
     position: relative;
     overflow: hidden;
+    content-visibility: auto;
+    contain-intrinsic-size: 900px 700px;
 }
 
 .vestidos::before {
