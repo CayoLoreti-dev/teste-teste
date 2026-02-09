@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const notifyMessage = document.getElementById('mensagemNotificacao');
   const navLinks = document.querySelectorAll('.nav-link');
   const navItems = document.querySelectorAll('.navegacao ul span');
-  const themeToggles = document.querySelectorAll('.theme-toggle, .theme-toggle-left');
 
   const closeNotifyModal = () => {
     notifyModal?.classList.remove('show');
@@ -35,35 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // ===== 0.1. MODO ESCURO =====
-  const storedTheme = localStorage.getItem('theme');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const initialTheme = storedTheme || (prefersDark ? 'dark' : 'light');
-  document.body.setAttribute('data-theme', initialTheme);
-
-  const updateThemeToggles = () => {
-    const isDark = document.body.getAttribute('data-theme') === 'dark';
-    themeToggles.forEach(btn => {
-      btn.setAttribute('aria-pressed', String(isDark));
-      const label = btn.querySelector('.theme-label');
-      const icon = btn.querySelector('.theme-icon');
-      if (label) label.textContent = isDark ? 'Modo claro' : 'Modo escuro';
-      if (icon) icon.textContent = isDark ? '☀️' : '🌙';
-    });
-  };
-
-  themeToggles.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const isDark = document.body.getAttribute('data-theme') === 'dark';
-      const nextTheme = isDark ? 'light' : 'dark';
-      document.body.setAttribute('data-theme', nextTheme);
-      localStorage.setItem('theme', nextTheme);
-      updateThemeToggles();
-    });
-  });
-
-  updateThemeToggles();
+  // Modo escuro é gerenciado por app.js
 
   // ===== 0.2. MODAL DE LOGIN/CADASTRO =====
   const modalLogin = document.getElementById('modalLogin');

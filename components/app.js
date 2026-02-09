@@ -10,11 +10,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ===== MODO ESCURO =====
   const themeToggles = document.querySelectorAll('.theme-toggle, .theme-toggle-left');
-  const storedTheme = localStorage.getItem('theme');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const initialTheme = storedTheme || (prefersDark ? 'dark' : 'light');
-  document.body.setAttribute('data-theme', initialTheme);
+  
+  // Função para obter o tema inicial (sistema ou localStorage)
+  const getInitialTheme = () => {
+    // Se o usuário nunca escolheu manualmente, usar a preferência do sistema
+    const storedTheme = localStorage.getItem('theme');
+    const userHasChosenTheme = localStorage.getItem('userHasChosenTheme');
+    
+    if (!userHasChosenTheme) {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      return prefersDark ? 'dark' : 'light';
+    }
+    
+    return storedTheme || 'light';
+  };
+  
+  // Define o tema inicial
+  document.body.setAttribute('data-theme', getInitialTheme());
 
+  // Atualiza os botões de toggle
   const updateThemeToggles = () => {
     const isDark = document.body.getAttribute('data-theme') === 'dark';
     themeToggles.forEach(btn => {
@@ -26,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
+  // Event listener para os botões de tema
   themeToggles.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
@@ -33,8 +48,21 @@ document.addEventListener('DOMContentLoaded', () => {
       const nextTheme = isDark ? 'light' : 'dark';
       document.body.setAttribute('data-theme', nextTheme);
       localStorage.setItem('theme', nextTheme);
+      localStorage.setItem('userHasChosenTheme', 'true');
       updateThemeToggles();
     });
+  });
+
+  // Observa mudanças na preferência de tema do sistema
+  const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+  mediaQuery.addEventListener('change', (e) => {
+    // Só atualiza automaticamente se o usuário não tiver escolhido manualmente
+    const userHasChosenTheme = localStorage.getItem('userHasChosenTheme');
+    if (!userHasChosenTheme) {
+      const newTheme = e.matches ? 'dark' : 'light';
+      document.body.setAttribute('data-theme', newTheme);
+      updateThemeToggles();
+    }
   });
 
   updateThemeToggles();
