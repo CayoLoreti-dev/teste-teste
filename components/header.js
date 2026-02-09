@@ -187,5 +187,6 @@ function initHeader(pageTitle, isCatalogPage = false) {
     placeholder.innerHTML = isCatalogPage 
       ? getHeaderHTMLForCatalog(pageTitle)
       : getHeaderHTML(pageTitle);
+    document.dispatchEvent(new CustomEvent('header-rendered'));
   }
 }
