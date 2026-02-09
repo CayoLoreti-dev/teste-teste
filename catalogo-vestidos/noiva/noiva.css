@@ -1330,7 +1330,16 @@ body[data-theme="dark"] .modal-historia-texto::-webkit-scrollbar-thumb:hover {
         height: 360px;
         box-shadow: 0 10px 28px rgba(119, 51, 59, 0.16);
     }
+    .carrossel-btn {
+        width: 44px;
+        height: 44px;
+    }
 
+    .carrossel-titulo {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+}
 
 @media (hover: none) {
     .vestidos img:hover,
@@ -1348,16 +1357,6 @@ body[data-theme="dark"] .modal-historia-texto::-webkit-scrollbar-thumb:hover {
         opacity: 0;
         width: 0;
         left: -100%;
-    }
-}
-    .carrossel-btn {
-        width: 44px;
-        height: 44px;
-    }
-
-    .carrossel-titulo {
-        font-size: 2rem;
-        margin-bottom: 2rem;
     }
 }
 
@@ -2089,6 +2088,136 @@ body[data-theme="dark"] .footer a:hover {
     background: linear-gradient(135deg, #5a2630 0%, #77333b 100%);
 }
 
+.btn-settings {
+    margin-top: 1.5rem;
+    width: 100%;
+    border: none;
+    padding: 0.9rem 1.2rem;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(119, 51, 59, 0.15), rgba(119, 51, 59, 0.2));
+    color: #77333b;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-settings:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(119, 51, 59, 0.2);
+}
+
+.modal-settings {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-settings.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-settings-content {
+    background: linear-gradient(135deg, #faf8f3 0%, #f4ede2 100%);
+    width: 90%;
+    max-width: 520px;
+    border-radius: 20px;
+    padding: 2.5rem;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(119, 51, 59, 0.3);
+    border: 2px solid rgba(230, 190, 138, 0.4);
+}
+
+.modal-settings-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: #77333b;
+    margin-bottom: 0.4rem;
+}
+
+.modal-settings-subtitle {
+    font-size: 0.95rem;
+    color: rgba(119, 51, 59, 0.7);
+    margin-bottom: 1.6rem;
+}
+
+.modal-settings-close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: #77333b;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modal-settings-close:hover {
+    transform: rotate(90deg);
+}
+
+.settings-section h3 {
+    font-size: 1.1rem;
+    color: #77333b;
+    margin-bottom: 0.6rem;
+}
+
+.settings-section p {
+    font-size: 0.9rem;
+    color: rgba(119, 51, 59, 0.7);
+    margin-bottom: 1rem;
+}
+
+.settings-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.settings-option {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 500;
+    color: #77333b;
+}
+
+.settings-option input {
+    accent-color: #c6956b;
+}
+
+.settings-actions {
+    margin-top: 1.8rem;
+}
+
+.btn-save-settings {
+    width: 100%;
+    border: none;
+    padding: 1rem 1.2rem;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #c6956b 0%, #e6be8a 100%);
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-save-settings:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(198, 149, 107, 0.4);
+}
+
 /* Modo escuro */
 body[data-theme="dark"] .modal-login-content {
     background: linear-gradient(135deg, #1a1317 0%, #120c0f 100%);
@@ -2133,6 +2262,31 @@ body[data-theme="dark"] .user-welcome {
 
 body[data-theme="dark"] .user-welcome {
     color: rgba(240, 231, 223, 0.7);
+}
+
+body[data-theme="dark"] .btn-settings {
+    color: #f0e7df;
+    background: linear-gradient(135deg, rgba(230, 190, 138, 0.18), rgba(230, 190, 138, 0.24));
+}
+
+body[data-theme="dark"] .modal-settings-content {
+    background: linear-gradient(135deg, #1a1317 0%, #120c0f 100%);
+    border-color: rgba(230, 190, 138, 0.3);
+}
+
+body[data-theme="dark"] .modal-settings-title,
+body[data-theme="dark"] .settings-section h3 {
+    color: #f0e7df;
+}
+
+body[data-theme="dark"] .modal-settings-subtitle,
+body[data-theme="dark"] .settings-section p,
+body[data-theme="dark"] .settings-option {
+    color: rgba(240, 231, 223, 0.75);
+}
+
+body[data-theme="dark"] .modal-settings-close {
+    color: #f0e7df;
 }
 
 /* 19. BARRA DE COOKIES */

@@ -47,6 +47,40 @@ function getModalsHTML() {
           </div>
           <button class="btn-logout" id="btnSair">Sair</button>
         </div>
+
+        <button class="btn-settings" id="btnOpenSettings">Configurações</button>
+      </div>
+    </div>
+
+    <!-- Modal de Configurações -->
+    <div class="modal-settings" id="modalSettings">
+      <div class="modal-settings-content">
+        <button class="modal-settings-close" id="btnCloseSettings" aria-label="Fechar">&times;</button>
+        <h2 class="modal-settings-title">Configurações</h2>
+        <p class="modal-settings-subtitle">Preferências salvas em cookies para futuras visitas.</p>
+
+        <div class="settings-section">
+          <h3>Preferências de cookies</h3>
+          <p>Escolha como deseja salvar suas preferências no site:</p>
+          <div class="settings-options" role="radiogroup" aria-label="Preferências de cookies">
+            <label class="settings-option">
+              <input type="radio" name="cookieConsent" value="necessary">
+              <span>Apenas necessários</span>
+            </label>
+            <label class="settings-option">
+              <input type="radio" name="cookieConsent" value="all">
+              <span>Aceitar tudo</span>
+            </label>
+            <label class="settings-option">
+              <input type="radio" name="cookieConsent" value="none">
+              <span>Recusar tudo</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="settings-actions">
+          <button class="btn-save-settings" id="btnSaveSettings">Salvar Preferências</button>
+        </div>
       </div>
     </div>
   `;
@@ -87,10 +121,15 @@ function setupModalListeners() {
   // Modal de login
   const modalLogin = document.getElementById('modalLogin');
   const closeLogin = document.querySelector('.modal-login-close');
+  const btnOpenSettings = document.getElementById('btnOpenSettings');
   const btnEntrar = document.getElementById('btnEntrar');
   const btnSair = document.getElementById('btnSair');
   const loginEmail = document.getElementById('loginEmail');
   const loginSenha = document.getElementById('loginSenha');
+
+  const modalSettings = document.getElementById('modalSettings');
+  const btnCloseSettings = document.getElementById('btnCloseSettings');
+  const btnSaveSettings = document.getElementById('btnSaveSettings');
 
   if (closeLogin) {
     closeLogin.addEventListener('click', closeLoginModal);
@@ -120,6 +159,34 @@ function setupModalListeners() {
     });
   }
 
+  if (btnOpenSettings) {
+    btnOpenSettings.addEventListener('click', () => {
+      openSettingsModal();
+    });
+  }
+
+  if (btnCloseSettings) {
+    btnCloseSettings.addEventListener('click', closeSettingsModal);
+  }
+
+  if (modalSettings) {
+    modalSettings.addEventListener('click', (e) => {
+      if (e.target === modalSettings) {
+        closeSettingsModal();
+      }
+    });
+  }
+
+  if (btnSaveSettings) {
+    btnSaveSettings.addEventListener('click', () => {
+      const selected = document.querySelector('input[name="cookieConsent"]:checked');
+      if (selected && typeof applyCookieConsent === 'function') {
+        applyCookieConsent(selected.value);
+      }
+      closeSettingsModal();
+    });
+  }
+
   // Fechar modais com ESC
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
@@ -129,8 +196,29 @@ function setupModalListeners() {
       if (modalLogin && modalLogin.classList.contains('show')) {
         closeLoginModal();
       }
+      if (modalSettings && modalSettings.classList.contains('show')) {
+        closeSettingsModal();
+      }
     }
   });
+}
+
+function openSettingsModal() {
+  const modalSettings = document.getElementById('modalSettings');
+  if (!modalSettings) return;
+
+  const consent = getCookie('cookieConsent') || localStorage.getItem('cookieConsent') || 'necessary';
+  const options = modalSettings.querySelectorAll('input[name="cookieConsent"]');
+  options.forEach(option => {
+    option.checked = option.value === consent;
+  });
+
+  modalSettings.classList.add('show');
+}
+
+function closeSettingsModal() {
+  const modalSettings = document.getElementById('modalSettings');
+  if (modalSettings) modalSettings.classList.remove('show');
 }
 
 // Abre o modal de login
