@@ -8,14 +8,23 @@ document.addEventListener('DOMContentLoaded', () => {
   // Inicializa o sistema de autenticação
   initAuth();
 
+  const getCookieConsent = () => localStorage.getItem('cookieConsent');
+
+  if (getCookieConsent() === 'none') {
+    localStorage.removeItem('theme');
+    localStorage.removeItem('userHasChosenTheme');
+  }
+
   // ===== MODO ESCURO =====
   const themeToggles = document.querySelectorAll('.theme-toggle, .theme-toggle-left');
   
   // Função para obter o tema inicial (sistema ou localStorage)
   const getInitialTheme = () => {
     // Se o usuário nunca escolheu manualmente, usar a preferência do sistema
-    const storedTheme = localStorage.getItem('theme');
-    const userHasChosenTheme = localStorage.getItem('userHasChosenTheme');
+    const consent = getCookieConsent();
+    const canStoreTheme = consent === 'necessary' || consent === 'all';
+    const storedTheme = canStoreTheme ? localStorage.getItem('theme') : null;
+    const userHasChosenTheme = canStoreTheme ? localStorage.getItem('userHasChosenTheme') : null;
     
     if (!userHasChosenTheme) {
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -40,6 +49,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
+  document.addEventListener('cookie-consent-changed', (event) => {
+    const consent = event?.detail?.consent;
+    if (consent === 'none') {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.body.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+      updateThemeToggles();
+      return;
+    }
+
+    if (consent === 'necessary' || consent === 'all') {
+      const storedTheme = localStorage.getItem('theme');
+      if (storedTheme) {
+        document.body.setAttribute('data-theme', storedTheme);
+      }
+      updateThemeToggles();
+    }
+  });
+
   // Event listener para os botões de tema
   themeToggles.forEach(btn => {
     btn.addEventListener('click', (e) => {
@@ -47,8 +74,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const isDark = document.body.getAttribute('data-theme') === 'dark';
       const nextTheme = isDark ? 'light' : 'dark';
       document.body.setAttribute('data-theme', nextTheme);
-      localStorage.setItem('theme', nextTheme);
-      localStorage.setItem('userHasChosenTheme', 'true');
+      const consent = getCookieConsent();
+      if (consent === 'necessary' || consent === 'all') {
+        localStorage.setItem('theme', nextTheme);
+        localStorage.setItem('userHasChosenTheme', 'true');
+      }
       updateThemeToggles();
     });
   });
@@ -57,7 +87,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
   mediaQuery.addEventListener('change', (e) => {
     // Só atualiza automaticamente se o usuário não tiver escolhido manualmente
-    const userHasChosenTheme = localStorage.getItem('userHasChosenTheme');
+    const consent = getCookieConsent();
+    const canStoreTheme = consent === 'necessary' || consent === 'all';
+    const userHasChosenTheme = canStoreTheme ? localStorage.getItem('userHasChosenTheme') : null;
     if (!userHasChosenTheme) {
       const newTheme = e.matches ? 'dark' : 'light';
       document.body.setAttribute('data-theme', newTheme);

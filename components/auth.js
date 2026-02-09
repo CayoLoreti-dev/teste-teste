@@ -9,15 +9,29 @@
 class AuthManager {
   constructor() {
     this.storageKey = 'userData';
+    this.memoryUser = null;
+  }
+
+  getConsent() {
+    return localStorage.getItem('cookieConsent');
+  }
+
+  canStorePersonalData() {
+    const consent = this.getConsent();
+    return consent === 'necessary' || consent === 'all';
   }
 
   // Verifica se o usuário está logado
   isLoggedIn() {
+    if (this.memoryUser) return true;
+    if (!this.canStorePersonalData()) return false;
     return localStorage.getItem(this.storageKey) !== null;
   }
 
   // Retorna dados do usuário logado
   getUser() {
+    if (this.memoryUser) return this.memoryUser;
+    if (!this.canStorePersonalData()) return null;
     const userData = localStorage.getItem(this.storageKey);
     return userData ? JSON.parse(userData) : null;
   }
@@ -34,13 +48,31 @@ class AuthManager {
       loggedAt: new Date().toISOString()
     };
 
-    localStorage.setItem(this.storageKey, JSON.stringify(userData));
+    if (this.canStorePersonalData()) {
+      localStorage.setItem(this.storageKey, JSON.stringify(userData));
+    } else {
+      this.memoryUser = userData;
+    }
     return userData;
   }
 
   // Faz logout do usuário
   logout() {
+    this.memoryUser = null;
+    if (this.canStorePersonalData()) {
+      localStorage.removeItem(this.storageKey);
+    }
+  }
+
+  clearStoredUser() {
+    this.memoryUser = null;
     localStorage.removeItem(this.storageKey);
+  }
+
+  persistMemoryUser() {
+    if (this.memoryUser && this.canStorePersonalData()) {
+      localStorage.setItem(this.storageKey, JSON.stringify(this.memoryUser));
+    }
   }
 
   // Atualiza os labels de "Minha Conta" com o nome do usuário
@@ -64,6 +96,10 @@ const auth = new AuthManager();
 
 // Inicializa o sistema de autenticação quando a página carrega
 function initAuth() {
+  if (auth.getConsent() === 'none') {
+    auth.clearStoredUser();
+  }
+
   // Atualiza os labels ao carregar
   auth.updateAccountLabels();
 

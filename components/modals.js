@@ -100,7 +100,12 @@ function setupModalListeners() {
   if (cookieNecessary) {
     cookieNecessary.addEventListener('click', () => {
       localStorage.setItem('cookieConsent', 'necessary');
+      const currentTheme = document.body.getAttribute('data-theme') || 'light';
+      localStorage.setItem('theme', currentTheme);
+      localStorage.setItem('userHasChosenTheme', 'true');
       if (cookieBanner) cookieBanner.classList.remove('show');
+      auth.persistMemoryUser();
+      document.dispatchEvent(new CustomEvent('cookie-consent-changed', { detail: { consent: 'necessary' } }));
       console.log('Cookies: Apenas necessários aceitos');
     });
   }
@@ -109,7 +114,12 @@ function setupModalListeners() {
   if (cookieAcceptAll) {
     cookieAcceptAll.addEventListener('click', () => {
       localStorage.setItem('cookieConsent', 'all');
+      const currentTheme = document.body.getAttribute('data-theme') || 'light';
+      localStorage.setItem('theme', currentTheme);
+      localStorage.setItem('userHasChosenTheme', 'true');
       if (cookieBanner) cookieBanner.classList.remove('show');
+      auth.persistMemoryUser();
+      document.dispatchEvent(new CustomEvent('cookie-consent-changed', { detail: { consent: 'all' } }));
       console.log('Cookies: Todos aceitos');
     });
   }
@@ -118,7 +128,12 @@ function setupModalListeners() {
   if (cookieRejectAll) {
     cookieRejectAll.addEventListener('click', () => {
       localStorage.setItem('cookieConsent', 'none');
+      localStorage.removeItem('theme');
+      localStorage.removeItem('userHasChosenTheme');
+      auth.clearStoredUser();
+      auth.updateAccountLabels();
       if (cookieBanner) cookieBanner.classList.remove('show');
+      document.dispatchEvent(new CustomEvent('cookie-consent-changed', { detail: { consent: 'none' } }));
       console.log('Cookies: Todos recusados');
     });
   }
