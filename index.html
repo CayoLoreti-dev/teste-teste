@@ -19,19 +19,19 @@
     <div class="imagens-noiva">
         <div class="imagens-noiva-1">
             <a class="imagem-link" href="./catalogo-vestidos/noiva/catalogo-noiva.html">
-                <img src="./assets/images/noivas/captura-2026-01-28-153613.png" alt="Vestido de noiva elegante">
+                <img src="./assets/images/noivas/captura-2026-01-28-153613.png" alt="Vestido de noiva elegante" loading="lazy" decoding="async">
                 <span class="imagem-texto">Noivas</span>
             </a>
         </div>
         <div class="imagens-noiva-2">
             <a class="imagem-link" href="./catalogo-vestidos/formatura/catalogo-formatura.html">
-                <img src="./assets/images/noivas/captura-2026-01-28-153820.png" alt="Vestido de noiva sofisticado">
+                <img src="./assets/images/noivas/captura-2026-01-28-153820.png" alt="Vestido de noiva sofisticado" loading="lazy" decoding="async">
                 <span class="imagem-texto">Formaturas</span>
             </a>
         </div>
         <div class="imagens-noiva-3">
             <a class="imagem-link" href="./catalogo-vestidos/madrinha/catalogo-madrinha.html">
-                <img src="./assets/images/noivas/captura-2026-01-28-153802.png" alt="Vestido de noiva clássico">
+                <img src="./assets/images/noivas/captura-2026-01-28-153802.png" alt="Vestido de noiva clássico" loading="lazy" decoding="async">
                 <span class="imagem-texto">Madrinhas</span>
             </a>
         </div>
@@ -72,12 +72,14 @@
 <!-- Scripts do sistema de componentes -->
 <script src="components/header.js"></script>
 <script src="components/auth.js"></script>
+<script src="components/cookies.js"></script>
 <script src="components/modals.js"></script>
 <script src="inicial-page/script.js"></script>
 <script src="components/app.js"></script>
 <script>
   // Inicializa o header e modais
   initHeader('Bem-Vinda(o)', false); // false = não é página de catálogo
+    initCookies();
   initModals();
 </script>
 </body>

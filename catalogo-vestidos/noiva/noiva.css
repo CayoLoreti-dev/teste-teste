@@ -611,6 +611,8 @@ body[data-theme="dark"] .drawer-action-item p {
     animation: fadeInUp 0.8s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
     position: relative;
     overflow: hidden;
+    content-visibility: auto;
+    contain-intrinsic-size: 800px 600px;
 }
 
 .carrossel-container::before {
@@ -710,6 +712,7 @@ body[data-theme="dark"] .drawer-action-item p {
     transition: all 0.35s cubic-bezier(0.2, 0.9, 0.3, 1);
     scroll-snap-align: center;
     position: relative;
+    will-change: transform;
 }
 
 .carrossel img::before {
@@ -1696,6 +1699,15 @@ body[data-theme="dark"] .modal-historia-texto::-webkit-scrollbar-thumb:hover {
             width: 32px;
             height: 32px;
         }
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
     }
 }
 

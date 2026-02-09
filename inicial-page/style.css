@@ -431,6 +431,8 @@ nav {
     padding: 80px 2rem;
     pointer-events: auto;
     z-index: 10;
+    content-visibility: auto;
+    contain-intrinsic-size: 900px 600px;
 }
 
 .texto-noiva ul {
@@ -457,6 +459,7 @@ nav {
     overflow: hidden;
     opacity: 0;
     animation: fadeInCard 0.8s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+    will-change: transform;
 }
 
 .card-categoria:nth-child(1) { animation-delay: 0.3s; }
@@ -1606,5 +1609,14 @@ body[data-theme="dark"] .cookie-btn-reject:hover {
 
     .cookie-btn {
         width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
     }
 }

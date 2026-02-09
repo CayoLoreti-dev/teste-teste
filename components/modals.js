@@ -7,21 +7,6 @@
 // Função que retorna o HTML dos modais
 function getModalsHTML() {
   return `
-    <!-- Barra de Cookies -->
-    <div class="cookie-banner" id="cookieBanner">
-      <div class="cookie-content">
-        <div class="cookie-text">
-          <h3>🍪 Usamos cookies</h3>
-          <p>Utilizamos cookies para melhorar sua experiência em nosso site. Você pode escolher quais cookies aceitar.</p>
-        </div>
-        <div class="cookie-buttons">
-          <button class="cookie-btn cookie-btn-necessary" id="cookieNecessary">Apenas Necessários</button>
-          <button class="cookie-btn cookie-btn-accept" id="cookieAcceptAll">Aceitar Tudo</button>
-          <button class="cookie-btn cookie-btn-reject" id="cookieRejectAll">Recusar Tudo</button>
-        </div>
-      </div>
-    </div>
-
     <!-- Modal para notificações -->
     <div class="modal-notificacao" id="modalNotificacao">
       <div class="modal-content-notif">
@@ -81,63 +66,6 @@ function initModals() {
 
 // Configura os event listeners dos modais
 function setupModalListeners() {
-  // ===== COOKIES =====
-  const cookieBanner = document.getElementById('cookieBanner');
-  const cookieNecessary = document.getElementById('cookieNecessary');
-  const cookieAcceptAll = document.getElementById('cookieAcceptAll');
-  const cookieRejectAll = document.getElementById('cookieRejectAll');
-
-  // Verifica se o usuário já fez uma escolha sobre cookies
-  const cookieConsent = localStorage.getItem('cookieConsent');
-  if (!cookieConsent && cookieBanner) {
-    // Mostra o banner após 1 segundo
-    setTimeout(() => {
-      cookieBanner.classList.add('show');
-    }, 1000);
-  }
-
-  // Aceitar apenas necessários
-  if (cookieNecessary) {
-    cookieNecessary.addEventListener('click', () => {
-      localStorage.setItem('cookieConsent', 'necessary');
-      const currentTheme = document.body.getAttribute('data-theme') || 'light';
-      localStorage.setItem('theme', currentTheme);
-      localStorage.setItem('userHasChosenTheme', 'true');
-      if (cookieBanner) cookieBanner.classList.remove('show');
-      auth.persistMemoryUser();
-      document.dispatchEvent(new CustomEvent('cookie-consent-changed', { detail: { consent: 'necessary' } }));
-      console.log('Cookies: Apenas necessários aceitos');
-    });
-  }
-
-  // Aceitar tudo
-  if (cookieAcceptAll) {
-    cookieAcceptAll.addEventListener('click', () => {
-      localStorage.setItem('cookieConsent', 'all');
-      const currentTheme = document.body.getAttribute('data-theme') || 'light';
-      localStorage.setItem('theme', currentTheme);
-      localStorage.setItem('userHasChosenTheme', 'true');
-      if (cookieBanner) cookieBanner.classList.remove('show');
-      auth.persistMemoryUser();
-      document.dispatchEvent(new CustomEvent('cookie-consent-changed', { detail: { consent: 'all' } }));
-      console.log('Cookies: Todos aceitos');
-    });
-  }
-
-  // Recusar tudo
-  if (cookieRejectAll) {
-    cookieRejectAll.addEventListener('click', () => {
-      localStorage.setItem('cookieConsent', 'none');
-      localStorage.removeItem('theme');
-      localStorage.removeItem('userHasChosenTheme');
-      auth.clearStoredUser();
-      auth.updateAccountLabels();
-      if (cookieBanner) cookieBanner.classList.remove('show');
-      document.dispatchEvent(new CustomEvent('cookie-consent-changed', { detail: { consent: 'none' } }));
-      console.log('Cookies: Todos recusados');
-    });
-  }
-
   // Modal de notificação
   const modalNotif = document.getElementById('modalNotificacao');
   const closeNotif = document.querySelector('.modal-close-notif');
