@@ -25,6 +25,12 @@ function getCookieBannerHTML() {
 function initCookies() {
   if (document.getElementById('cookieBanner')) return;
 
+  const legacyConsent = localStorage.getItem('cookieConsent');
+  if (!getCookie('cookieConsent') && legacyConsent) {
+    setCookie('cookieConsent', legacyConsent, 30);
+    localStorage.removeItem('cookieConsent');
+  }
+
   const bannerWrapper = document.createElement('div');
   bannerWrapper.innerHTML = getCookieBannerHTML();
   document.body.appendChild(bannerWrapper.firstElementChild);
@@ -34,7 +40,7 @@ function initCookies() {
   const cookieAcceptAll = document.getElementById('cookieAcceptAll');
   const cookieRejectAll = document.getElementById('cookieRejectAll');
 
-  const cookieConsent = localStorage.getItem('cookieConsent');
+  const cookieConsent = getCookie('cookieConsent');
   if (!cookieConsent && cookieBanner) {
     setTimeout(() => {
       cookieBanner.classList.add('show');
@@ -43,45 +49,54 @@ function initCookies() {
 
   if (cookieNecessary) {
     cookieNecessary.addEventListener('click', () => {
-      localStorage.setItem('cookieConsent', 'necessary');
+      setCookie('cookieConsent', 'necessary', 30);
       const currentTheme = document.body.getAttribute('data-theme') || 'light';
-      localStorage.setItem('theme', currentTheme);
-      localStorage.setItem('userHasChosenTheme', 'true');
+      setCookie('theme', currentTheme, 30);
+      setCookie('userHasChosenTheme', 'true', 30);
       if (cookieBanner) cookieBanner.classList.remove('show');
       if (typeof auth !== 'undefined') {
         auth.persistMemoryUser();
       }
       document.dispatchEvent(new CustomEvent('cookie-consent-changed', { detail: { consent: 'necessary' } }));
+      localStorage.removeItem('theme');
+      localStorage.removeItem('userHasChosenTheme');
+      localStorage.removeItem('cookieConsent');
       console.log('Cookies: Apenas necessários aceitos');
     });
   }
 
   if (cookieAcceptAll) {
     cookieAcceptAll.addEventListener('click', () => {
-      localStorage.setItem('cookieConsent', 'all');
+      setCookie('cookieConsent', 'all', 30);
       const currentTheme = document.body.getAttribute('data-theme') || 'light';
-      localStorage.setItem('theme', currentTheme);
-      localStorage.setItem('userHasChosenTheme', 'true');
+      setCookie('theme', currentTheme, 30);
+      setCookie('userHasChosenTheme', 'true', 30);
       if (cookieBanner) cookieBanner.classList.remove('show');
       if (typeof auth !== 'undefined') {
         auth.persistMemoryUser();
       }
       document.dispatchEvent(new CustomEvent('cookie-consent-changed', { detail: { consent: 'all' } }));
+      localStorage.removeItem('theme');
+      localStorage.removeItem('userHasChosenTheme');
+      localStorage.removeItem('cookieConsent');
       console.log('Cookies: Todos aceitos');
     });
   }
 
   if (cookieRejectAll) {
     cookieRejectAll.addEventListener('click', () => {
-      localStorage.setItem('cookieConsent', 'none');
-      localStorage.removeItem('theme');
-      localStorage.removeItem('userHasChosenTheme');
+      setCookie('cookieConsent', 'none', 30);
+      removeCookie('theme');
+      removeCookie('userHasChosenTheme');
       if (typeof auth !== 'undefined') {
         auth.clearStoredUser();
         auth.updateAccountLabels();
       }
       if (cookieBanner) cookieBanner.classList.remove('show');
       document.dispatchEvent(new CustomEvent('cookie-consent-changed', { detail: { consent: 'none' } }));
+      localStorage.removeItem('theme');
+      localStorage.removeItem('userHasChosenTheme');
+      localStorage.removeItem('cookieConsent');
       console.log('Cookies: Todos recusados');
     });
   }

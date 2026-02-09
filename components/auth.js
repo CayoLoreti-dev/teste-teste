@@ -13,7 +13,7 @@ class AuthManager {
   }
 
   getConsent() {
-    return localStorage.getItem('cookieConsent');
+    return getCookie('cookieConsent') || localStorage.getItem('cookieConsent');
   }
 
   canStorePersonalData() {
@@ -25,15 +25,14 @@ class AuthManager {
   isLoggedIn() {
     if (this.memoryUser) return true;
     if (!this.canStorePersonalData()) return false;
-    return localStorage.getItem(this.storageKey) !== null;
+    return getCookie(this.storageKey) !== null;
   }
 
   // Retorna dados do usuário logado
   getUser() {
     if (this.memoryUser) return this.memoryUser;
     if (!this.canStorePersonalData()) return null;
-    const userData = localStorage.getItem(this.storageKey);
-    return userData ? JSON.parse(userData) : null;
+    return getCookieJSON(this.storageKey);
   }
 
   // Faz login do usuário
@@ -49,7 +48,7 @@ class AuthManager {
     };
 
     if (this.canStorePersonalData()) {
-      localStorage.setItem(this.storageKey, JSON.stringify(userData));
+      setCookieJSON(this.storageKey, userData, 30);
     } else {
       this.memoryUser = userData;
     }
@@ -60,18 +59,19 @@ class AuthManager {
   logout() {
     this.memoryUser = null;
     if (this.canStorePersonalData()) {
-      localStorage.removeItem(this.storageKey);
+      removeCookie(this.storageKey);
     }
   }
 
   clearStoredUser() {
     this.memoryUser = null;
+    removeCookie(this.storageKey);
     localStorage.removeItem(this.storageKey);
   }
 
   persistMemoryUser() {
     if (this.memoryUser && this.canStorePersonalData()) {
-      localStorage.setItem(this.storageKey, JSON.stringify(this.memoryUser));
+      setCookieJSON(this.storageKey, this.memoryUser, 30);
     }
   }
 
@@ -96,6 +96,17 @@ const auth = new AuthManager();
 
 // Inicializa o sistema de autenticação quando a página carrega
 function initAuth() {
+  const consent = auth.getConsent();
+  const legacyUserData = localStorage.getItem('userData');
+  if ((consent === 'necessary' || consent === 'all') && legacyUserData && !getCookie('userData')) {
+    try {
+      setCookieJSON('userData', JSON.parse(legacyUserData), 30);
+    } catch {
+      // Ignora erros de parse
+    }
+    localStorage.removeItem('userData');
+  }
+
   if (auth.getConsent() === 'none') {
     auth.clearStoredUser();
   }

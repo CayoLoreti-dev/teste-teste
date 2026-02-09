@@ -8,19 +8,47 @@ document.addEventListener('DOMContentLoaded', () => {
   // Inicializa o sistema de autenticação
   initAuth();
 
-  const getCookieConsent = () => localStorage.getItem('cookieConsent');
+  const getCookieConsent = () => getCookie('cookieConsent') || localStorage.getItem('cookieConsent');
   const getThemeStorage = () => {
     const consent = getCookieConsent();
-    if (consent === 'necessary' || consent === 'all') return localStorage;
-    if (consent === null) return sessionStorage;
+    if (consent === 'necessary' || consent === 'all') return 'cookie';
+    if (consent === null) return 'session';
+    return 'none';
+  };
+  const setThemeValue = (key, value) => {
+    const storage = getThemeStorage();
+    if (storage === 'cookie') setCookie(key, value, 30);
+    if (storage === 'session') sessionStorage.setItem(key, value);
+  };
+  const getThemeValue = (key) => {
+    const storage = getThemeStorage();
+    if (storage === 'cookie') return getCookie(key);
+    if (storage === 'session') return sessionStorage.getItem(key);
     return null;
   };
-
-  if (getCookieConsent() === 'none') {
-    localStorage.removeItem('theme');
-    localStorage.removeItem('userHasChosenTheme');
+  const clearThemeStorage = () => {
+    removeCookie('theme');
+    removeCookie('userHasChosenTheme');
     sessionStorage.removeItem('theme');
     sessionStorage.removeItem('userHasChosenTheme');
+    localStorage.removeItem('theme');
+    localStorage.removeItem('userHasChosenTheme');
+  };
+
+  const legacyTheme = localStorage.getItem('theme');
+  const legacyChosen = localStorage.getItem('userHasChosenTheme');
+  if (legacyTheme && !getCookie('theme')) {
+    setCookie('theme', legacyTheme, 30);
+  }
+  if (legacyChosen && !getCookie('userHasChosenTheme')) {
+    setCookie('userHasChosenTheme', legacyChosen, 30);
+  }
+  if (localStorage.getItem('cookieConsent') && !getCookie('cookieConsent')) {
+    setCookie('cookieConsent', localStorage.getItem('cookieConsent'), 30);
+  }
+
+  if (getCookieConsent() === 'none') {
+    clearThemeStorage();
   }
 
   // ===== MODO ESCURO =====
@@ -29,9 +57,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Função para obter o tema inicial (sistema ou localStorage)
   const getInitialTheme = () => {
     // Se o usuário nunca escolheu manualmente, usar a preferência do sistema
-    const storage = getThemeStorage();
-    const storedTheme = storage ? storage.getItem('theme') : null;
-    const userHasChosenTheme = storage ? storage.getItem('userHasChosenTheme') : null;
+    const storedTheme = getThemeValue('theme');
+    const userHasChosenTheme = getThemeValue('userHasChosenTheme');
     
     if (!userHasChosenTheme) {
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -61,10 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (consent === 'none') {
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       document.body.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
-      localStorage.removeItem('theme');
-      localStorage.removeItem('userHasChosenTheme');
-      sessionStorage.removeItem('theme');
-      sessionStorage.removeItem('userHasChosenTheme');
+      clearThemeStorage();
       updateThemeToggles();
       return;
     }
@@ -73,15 +97,15 @@ document.addEventListener('DOMContentLoaded', () => {
       const sessionTheme = sessionStorage.getItem('theme');
       const sessionChosen = sessionStorage.getItem('userHasChosenTheme');
       if (sessionTheme) {
-        localStorage.setItem('theme', sessionTheme);
+        setCookie('theme', sessionTheme, 30);
       }
       if (sessionChosen) {
-        localStorage.setItem('userHasChosenTheme', sessionChosen);
+        setCookie('userHasChosenTheme', sessionChosen, 30);
       }
       sessionStorage.removeItem('theme');
       sessionStorage.removeItem('userHasChosenTheme');
 
-      const storedTheme = localStorage.getItem('theme');
+      const storedTheme = getCookie('theme');
       if (storedTheme) {
         document.body.setAttribute('data-theme', storedTheme);
       }
@@ -96,11 +120,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const isDark = document.body.getAttribute('data-theme') === 'dark';
       const nextTheme = isDark ? 'light' : 'dark';
       document.body.setAttribute('data-theme', nextTheme);
-      const storage = getThemeStorage();
-      if (storage) {
-        storage.setItem('theme', nextTheme);
-        storage.setItem('userHasChosenTheme', 'true');
-      }
+      setThemeValue('theme', nextTheme);
+      setThemeValue('userHasChosenTheme', 'true');
       updateThemeToggles();
     });
   });
@@ -109,8 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
   mediaQuery.addEventListener('change', (e) => {
     // Só atualiza automaticamente se o usuário não tiver escolhido manualmente
-    const storage = getThemeStorage();
-    const userHasChosenTheme = storage ? storage.getItem('userHasChosenTheme') : null;
+    const userHasChosenTheme = getThemeValue('userHasChosenTheme');
     if (!userHasChosenTheme) {
       const newTheme = e.matches ? 'dark' : 'light';
       document.body.setAttribute('data-theme', newTheme);
