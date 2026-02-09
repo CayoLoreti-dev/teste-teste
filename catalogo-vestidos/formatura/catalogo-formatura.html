@@ -14,12 +14,32 @@
 <!-- Header será injetado por JavaScript -->
 <div id="header-placeholder"></div>
 
-<main class="catalogo-main">
-    <section class="catalogo-hero">
-        <div class="catalogo-hero-content">
-            <h1>Formaturas</h1>
-            <p>O catálogo completo está chegando. Em breve você verá vestidos deslumbrantes para a sua formatura.</p>
-            <a class="catalogo-cta" href="../../index.html">Voltar ao início</a>
+<main>
+    <section class="vestidos formatura-destaques">
+        <div class="vestido-1">
+            <img src="img-vestidos/webp/formatura-1.png" alt="Vestido de formatura em destaque" loading="lazy" decoding="async">
+        </div>
+
+        <div class="vestido-2">
+            <img src="img-vestidos/webp/formatura-2.png" alt="Vestido de formatura elegante" loading="lazy" decoding="async">
+        </div>
+
+        <div class="vestido-3">
+            <img src="img-vestidos/webp/formatura-3.png" alt="Vestido de formatura clássico" loading="lazy" decoding="async">
+        </div>
+
+        <div class="vestido-4">
+            <img src="img-vestidos/webp/formatura-4.png" alt="Vestido de formatura sofisticado" loading="lazy" decoding="async">
+        </div>
+    </section>
+
+    <section class="catalogo-main">
+        <div class="catalogo-hero">
+            <div class="catalogo-hero-content">
+                <h1>Formaturas</h1>
+                <p>O catálogo completo está chegando. Em breve você verá vestidos deslumbrantes para a sua formatura.</p>
+                <a class="catalogo-cta" href="../../index.html">Voltar ao início</a>
+            </div>
         </div>
     </section>
 </main>
@@ -43,6 +63,9 @@
     initCookies();
     initModals();
 </script>
+
+<!-- Script específico da página -->
+<script src="formatura.js" defer></script>
 
 <!-- Script comum para funcionalidades compartilhadas (modo escuro, menu, etc.) -->
 <script src="../../components/app.js"></script>

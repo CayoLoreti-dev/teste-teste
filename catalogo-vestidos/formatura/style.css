@@ -1,6 +1,36 @@
 @import url("../noiva/noiva.css");
 
 /* Ajustes específicos para a página de formatura */
+.formatura-destaques {
+	gap: 20px;
+	padding-top: 2.8rem;
+}
+
+.formatura-destaques img {
+	animation: fadeCascade 0.45s ease-out forwards;
+	animation-delay: var(--delay, 0s);
+	animation-play-state: paused;
+	transform: translateY(14px);
+	opacity: 0;
+	filter: none;
+	box-shadow: 0 18px 40px rgba(119, 51, 59, 0.18), 0 0 70px rgba(230, 190, 138, 0.25);
+}
+
+.formatura-destaques.play img {
+	animation-play-state: running;
+}
+
+@keyframes fadeCascade {
+	0% {
+		opacity: 0;
+		transform: translateY(14px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
 .catalogo-main {
 	min-height: 60vh;
 	display: flex;
@@ -66,4 +96,13 @@ body[data-theme="dark"] .catalogo-hero h1 {
 
 body[data-theme="dark"] .catalogo-hero p {
 	color: rgba(242, 231, 223, 0.7);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.formatura-destaques img {
+		animation: none;
+		opacity: 1;
+		transform: none;
+		filter: none;
+	}
 }
