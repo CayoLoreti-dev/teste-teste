@@ -15,6 +15,10 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
+body.no-scroll {
+    overflow: hidden;
+}
+
 /* 2. CABEÇALHO (BARRA PIX) */
 .pix {
     background: linear-gradient(90deg, #f8f4ed 0%, #f9f6f0 50%, #f8f4ed 100%);
@@ -265,6 +269,7 @@ hr {
     z-index: 999;
     transition: left 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
     backdrop-filter: blur(5px);
+    will-change: left;
 }
 
 .drawer.open {
@@ -360,7 +365,7 @@ hr {
 
 /* OVERLAY PARA FECHAR DRAWER */
 .drawer-overlay {
-    display: none;
+    display: block;
     position: fixed;
     top: 0;
     left: 0;
@@ -369,11 +374,14 @@ hr {
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(2px);
     z-index: 998;
+    opacity: 0;
+    pointer-events: none;
     transition: opacity 0.3s ease;
 }
 
 .drawer-overlay.open {
-    display: block;
+    opacity: 1;
+    pointer-events: auto;
 }
 
 /* 9.5 MODO ESCURO */

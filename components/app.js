@@ -154,12 +154,14 @@ document.addEventListener('DOMContentLoaded', () => {
       menuHamburger.classList.add('active');
       drawer.classList.add('open');
       drawerOverlay?.classList.add('open');
+      document.body.classList.add('no-scroll');
     };
 
     const closeDrawer = () => {
       menuHamburger.classList.remove('active');
       drawer.classList.remove('open');
       drawerOverlay?.classList.remove('open');
+      document.body.classList.remove('no-scroll');
     };
 
     menuHamburger.addEventListener('click', () => {
