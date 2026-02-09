@@ -9,10 +9,18 @@ document.addEventListener('DOMContentLoaded', () => {
   initAuth();
 
   const getCookieConsent = () => localStorage.getItem('cookieConsent');
+  const getThemeStorage = () => {
+    const consent = getCookieConsent();
+    if (consent === 'necessary' || consent === 'all') return localStorage;
+    if (consent === null) return sessionStorage;
+    return null;
+  };
 
   if (getCookieConsent() === 'none') {
     localStorage.removeItem('theme');
     localStorage.removeItem('userHasChosenTheme');
+    sessionStorage.removeItem('theme');
+    sessionStorage.removeItem('userHasChosenTheme');
   }
 
   // ===== MODO ESCURO =====
@@ -21,10 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Função para obter o tema inicial (sistema ou localStorage)
   const getInitialTheme = () => {
     // Se o usuário nunca escolheu manualmente, usar a preferência do sistema
-    const consent = getCookieConsent();
-    const canStoreTheme = consent === 'necessary' || consent === 'all';
-    const storedTheme = canStoreTheme ? localStorage.getItem('theme') : null;
-    const userHasChosenTheme = canStoreTheme ? localStorage.getItem('userHasChosenTheme') : null;
+    const storage = getThemeStorage();
+    const storedTheme = storage ? storage.getItem('theme') : null;
+    const userHasChosenTheme = storage ? storage.getItem('userHasChosenTheme') : null;
     
     if (!userHasChosenTheme) {
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -54,11 +61,26 @@ document.addEventListener('DOMContentLoaded', () => {
     if (consent === 'none') {
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       document.body.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+      localStorage.removeItem('theme');
+      localStorage.removeItem('userHasChosenTheme');
+      sessionStorage.removeItem('theme');
+      sessionStorage.removeItem('userHasChosenTheme');
       updateThemeToggles();
       return;
     }
 
     if (consent === 'necessary' || consent === 'all') {
+      const sessionTheme = sessionStorage.getItem('theme');
+      const sessionChosen = sessionStorage.getItem('userHasChosenTheme');
+      if (sessionTheme) {
+        localStorage.setItem('theme', sessionTheme);
+      }
+      if (sessionChosen) {
+        localStorage.setItem('userHasChosenTheme', sessionChosen);
+      }
+      sessionStorage.removeItem('theme');
+      sessionStorage.removeItem('userHasChosenTheme');
+
       const storedTheme = localStorage.getItem('theme');
       if (storedTheme) {
         document.body.setAttribute('data-theme', storedTheme);
@@ -74,10 +96,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const isDark = document.body.getAttribute('data-theme') === 'dark';
       const nextTheme = isDark ? 'light' : 'dark';
       document.body.setAttribute('data-theme', nextTheme);
-      const consent = getCookieConsent();
-      if (consent === 'necessary' || consent === 'all') {
-        localStorage.setItem('theme', nextTheme);
-        localStorage.setItem('userHasChosenTheme', 'true');
+      const storage = getThemeStorage();
+      if (storage) {
+        storage.setItem('theme', nextTheme);
+        storage.setItem('userHasChosenTheme', 'true');
       }
       updateThemeToggles();
     });
@@ -87,9 +109,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
   mediaQuery.addEventListener('change', (e) => {
     // Só atualiza automaticamente se o usuário não tiver escolhido manualmente
-    const consent = getCookieConsent();
-    const canStoreTheme = consent === 'necessary' || consent === 'all';
-    const userHasChosenTheme = canStoreTheme ? localStorage.getItem('userHasChosenTheme') : null;
+    const storage = getThemeStorage();
+    const userHasChosenTheme = storage ? storage.getItem('userHasChosenTheme') : null;
     if (!userHasChosenTheme) {
       const newTheme = e.matches ? 'dark' : 'light';
       document.body.setAttribute('data-theme', newTheme);
