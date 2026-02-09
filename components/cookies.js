@@ -82,7 +82,6 @@ function initCookies() {
     cookieNecessary.addEventListener('click', () => {
       if (cookieBanner) cookieBanner.classList.remove('show');
       applyCookieConsent('necessary');
-      console.log('Cookies: Apenas necessários aceitos');
     });
   }
 
@@ -90,7 +89,6 @@ function initCookies() {
     cookieAcceptAll.addEventListener('click', () => {
       if (cookieBanner) cookieBanner.classList.remove('show');
       applyCookieConsent('all');
-      console.log('Cookies: Todos aceitos');
     });
   }
 
@@ -98,7 +96,6 @@ function initCookies() {
     cookieRejectAll.addEventListener('click', () => {
       if (cookieBanner) cookieBanner.classList.remove('show');
       applyCookieConsent('none');
-      console.log('Cookies: Todos recusados');
     });
   }
 }
