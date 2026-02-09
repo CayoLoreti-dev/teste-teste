@@ -1595,6 +1595,7 @@ body[data-theme="dark"] .modal-historia-texto::-webkit-scrollbar-thumb:hover {
         width: calc(50% - 4px);
         height: auto;
         aspect-ratio: 3/4;
+        box-shadow: 0 10px 24px rgba(119, 51, 59, 0.18), 0 0 30px rgba(230, 190, 138, 0.15);
     }
 
     .carrossel-container {
@@ -1701,6 +1702,19 @@ body[data-theme="dark"] .modal-historia-texto::-webkit-scrollbar-thumb:hover {
             width: 32px;
             height: 32px;
         }
+    }
+
+    .navbar,
+    .footer,
+    .cookie-banner,
+    .carrossel-btn {
+        box-shadow: none;
+        backdrop-filter: none;
+    }
+
+    .action-item img,
+    .theme-toggle-left .theme-icon {
+        filter: none;
     }
 }
 

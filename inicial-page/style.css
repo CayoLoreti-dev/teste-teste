@@ -1094,6 +1094,7 @@ body[data-theme="dark"] .card-categoria:hover {
         width: 100%;
         max-width: 180px;
         margin: 0 auto;
+        box-shadow: 0 10px 24px rgba(255, 255, 255, 0.25), 0 0 30px rgba(230, 190, 138, 0.15);
     }
 
     .texto-noiva {
@@ -1148,6 +1149,19 @@ body[data-theme="dark"] .card-categoria:hover {
         width: 30px;
         height: 30px;
         font-size: 24px;
+    }
+
+    .navbar,
+    .footer,
+    .cookie-banner,
+    .card-categoria {
+        box-shadow: none;
+        backdrop-filter: none;
+    }
+
+    .action-item img,
+    .theme-toggle-left .theme-icon {
+        filter: none;
     }
 }
 
