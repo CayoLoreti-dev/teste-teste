@@ -393,16 +393,20 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!carrossel) return;
 
   // 3.1: Observador de Intersecção - Anima o carrossel quando entra na tela
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        carrosselContainer.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.2 });
+  if ('IntersectionObserver' in window && carrosselContainer) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          carrosselContainer.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
 
-  observer.observe(carrosselContainer);
+    observer.observe(carrosselContainer);
+  } else if (carrosselContainer) {
+    carrosselContainer.classList.add('visible');
+  }
 
   // 3.2: Variáveis de controle
   const isMobile = window.innerWidth <= 768;
@@ -588,48 +592,6 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (e.key === 'ArrowRight') {
       btnNext?.click();
     }
-  });
-
-  // ===== PARTE 8: MENU HAMBURGUÊS =====
-  const menuHamburger = document.getElementById('menuHamburger');
-  const drawer = document.getElementById('drawer');
-  const drawerClose = document.getElementById('drawerClose');
-  const drawerOverlay = document.querySelector('.drawer-overlay');
-  const drawerActionItems = document.querySelectorAll('.drawer-action-item');
-
-  // Abrir/fechar drawer ao clicar no menu hamburguês
-  if (menuHamburger) {
-    menuHamburger.addEventListener('click', () => {
-      menuHamburger.classList.toggle('active');
-      drawer.classList.toggle('open');
-    });
-  }
-
-  // Fechar drawer ao clicar no botão de fechar
-  if (drawerClose) {
-    drawerClose.addEventListener('click', () => {
-      menuHamburger.classList.remove('active');
-      drawer.classList.remove('open');
-    });
-  }
-
-  // Fechar drawer ao clicar no overlay
-  if (drawerOverlay) {
-    drawerOverlay.addEventListener('click', () => {
-      menuHamburger.classList.remove('active');
-      drawer.classList.remove('open');
-    });
-  }
-
-  // Fechar drawer ao clicar em um item
-  drawerActionItems.forEach(item => {
-    item.addEventListener('click', () => {
-      if (item.classList.contains('theme-toggle') || item.id === 'btnMinhaContaDrawer') return;
-      menuHamburger.classList.remove('active');
-      drawer.classList.remove('open');
-
-      showNotifyModal('Funcionalidade em desenvolvimento!');
-    });
   });
 
   console.log('Página de noivas carregada com sucesso! 👰✨');
