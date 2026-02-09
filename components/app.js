@@ -152,16 +152,57 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const openDrawer = () => {
       menuHamburger.classList.add('active');
+      menuHamburger.setAttribute('aria-expanded', 'true');
       drawer.classList.add('open');
       drawerOverlay?.classList.add('open');
       document.body.classList.add('no-scroll');
+
+      const focusableSelectors = 'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+      const focusableElements = Array.from(drawer.querySelectorAll(focusableSelectors));
+      const firstFocusable = focusableElements[0];
+      const lastFocusable = focusableElements[focusableElements.length - 1];
+
+      const handleKeydown = (event) => {
+        if (event.key === 'Escape') {
+          closeDrawer();
+          return;
+        }
+
+        if (event.key !== 'Tab' || focusableElements.length === 0) return;
+
+        if (event.shiftKey && document.activeElement === firstFocusable) {
+          event.preventDefault();
+          lastFocusable?.focus();
+          return;
+        }
+
+        if (!event.shiftKey && document.activeElement === lastFocusable) {
+          event.preventDefault();
+          firstFocusable?.focus();
+        }
+      };
+
+      if (!drawer.dataset.trapAttached) {
+        drawer.dataset.trapAttached = 'true';
+        drawer.dataset.trapHandlerId = 'drawerTrap';
+      }
+
+      drawer._trapHandler = handleKeydown;
+      document.addEventListener('keydown', handleKeydown);
+      firstFocusable?.focus();
     };
 
     const closeDrawer = () => {
       menuHamburger.classList.remove('active');
+      menuHamburger.setAttribute('aria-expanded', 'false');
       drawer.classList.remove('open');
       drawerOverlay?.classList.remove('open');
       document.body.classList.remove('no-scroll');
+
+      if (drawer._trapHandler) {
+        document.removeEventListener('keydown', drawer._trapHandler);
+        drawer._trapHandler = null;
+      }
     };
 
     menuHamburger.addEventListener('click', () => {
