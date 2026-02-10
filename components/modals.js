@@ -83,6 +83,39 @@ function getModalsHTML() {
         </div>
       </div>
     </div>
+
+    <!-- Widget de Atendimento -->
+    <div class="atendimento-widget" id="atendimentoWidget" role="dialog" aria-label="Atendimento SSISSI" aria-live="polite">
+      <div class="atendimento-header">
+        <div class="atendimento-profile">
+          <div class="atendimento-avatar" aria-hidden="true">💬</div>
+          <div>
+            <p class="atendimento-title">Lia • Consultora SSISSI</p>
+            <span class="atendimento-subtitle">Online agora • 09:00–18:00</span>
+          </div>
+        </div>
+        <button class="atendimento-close" id="btnCloseAtendimento" aria-label="Fechar atendimento">&times;</button>
+      </div>
+      <div class="atendimento-body">
+        <div class="atendimento-chat" id="atendimentoChat">
+          <div class="atendimento-bubble" id="atendimentoMensagem" data-full-text="Oi! 👋 Sou a Lia, consultora SSISSI. Como posso te ajudar hoje?"></div>
+        </div>
+        <div class="atendimento-options" id="atendimentoOptions">
+          <button class="atendimento-option" data-atendimento="agendar">Agendar prova</button>
+          <button class="atendimento-option" data-atendimento="duvidas">Tirar dúvidas rápidas</button>
+          <button class="atendimento-option" data-atendimento="medidas">Guia de medidas</button>
+          <button class="atendimento-option" data-atendimento="entrega">Prazo e retirada</button>
+          <button class="atendimento-option" data-atendimento="consultora">Falar com consultora</button>
+        </div>
+      </div>
+      <div class="atendimento-footer">
+        <span>Atendimento em horário comercial</span>
+        <div class="atendimento-footer-actions">
+          <button class="atendimento-footer-button" id="btnAtendimentoRestart" type="button">Iniciar nova conversa</button>
+          <button class="atendimento-footer-button is-secondary" id="btnAtendimentoClear" type="button">Limpar conversa</button>
+        </div>
+      </div>
+    </div>
   `;
 }
 

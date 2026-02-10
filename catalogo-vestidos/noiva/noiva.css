@@ -2482,4 +2482,406 @@ body[data-theme="dark"] .cookie-btn-reject:hover {
     }
 }
 
+/* 20. WIDGET DE ATENDIMENTO */
+.atendimento-widget {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    width: min(420px, 92vw);
+    min-height: 360px;
+    max-height: calc(100vh - 32px);
+    background: linear-gradient(135deg, #ffffff 0%, #fffdf9 100%);
+    border: 1px solid rgba(230, 190, 138, 0.35);
+    border-radius: 18px;
+    box-shadow: 0 20px 60px rgba(119, 51, 59, 0.25);
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
+    z-index: 10050;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.atendimento-widget.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.atendimento-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.1rem 1.2rem;
+    background: linear-gradient(135deg, rgba(119, 51, 59, 0.1) 0%, rgba(230, 190, 138, 0.15) 100%);
+    border-bottom: 1px solid rgba(230, 190, 138, 0.25);
+}
+
+.atendimento-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.atendimento-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #f3ece5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    box-shadow: inset 0 0 0 2px rgba(230, 190, 138, 0.35);
+}
+
+.atendimento-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #77333b;
+    margin-bottom: 0.2rem;
+}
+
+.atendimento-subtitle {
+    font-size: 0.85rem;
+    color: rgba(119, 51, 59, 0.7);
+}
+
+.atendimento-close {
+    background: none;
+    border: none;
+    font-size: 26px;
+    color: #77333b;
+    cursor: pointer;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.atendimento-close:hover {
+    background: rgba(230, 190, 138, 0.3);
+    transform: rotate(90deg);
+}
+
+.atendimento-body {
+    padding: 1.1rem 1.2rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+}
+
+.atendimento-body::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.atendimento-chat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    align-items: flex-start;
+}
+
+.atendimento-bubble {
+    background: #e9f7ef;
+    color: #5a2630;
+    border-radius: 16px 16px 16px 6px;
+    padding: 0.9rem 1rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    max-width: 90%;
+    box-shadow: 0 10px 24px rgba(119, 51, 59, 0.12);
+    opacity: 0;
+    transform: translateY(8px);
+    transition: all 0.35s ease;
+    position: relative;
+}
+
+.atendimento-bubble::after {
+    content: '';
+    position: absolute;
+    left: 10px;
+    bottom: -8px;
+    width: 14px;
+    height: 14px;
+    background: #e9f7ef;
+    transform: rotate(45deg);
+    border-bottom-left-radius: 4px;
+}
+
+.atendimento-bubble.user {
+    align-self: flex-end;
+    background: #dcf8c6;
+    color: #2f3a2e;
+    border-radius: 16px 16px 6px 16px;
+}
+
+.atendimento-bubble.user::after {
+    left: auto;
+    right: 10px;
+    background: #dcf8c6;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 4px;
+}
+
+.atendimento-bubble.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.atendimento-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.4s ease;
+    max-height: 40vh;
+    overflow-y: auto;
+    padding-right: 0.2rem;
+}
+
+.atendimento-options.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.atendimento-option {
+    border: none;
+    cursor: pointer;
+    padding: 0.55rem 0.9rem;
+    border-radius: 10px;
+    background: rgba(119, 51, 59, 0.08);
+    color: #77333b;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-align: left;
+    transition: all 0.2s ease;
+    opacity: 0;
+    transform: translateY(6px);
+}
+
+.atendimento-option:hover {
+    background: rgba(119, 51, 59, 0.16);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(119, 51, 59, 0.15);
+}
+
+.atendimento-option:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 12px rgba(119, 51, 59, 0.12);
+}
+
+.atendimento-option:focus-visible {
+    outline: 2px solid rgba(119, 51, 59, 0.35);
+    outline-offset: 2px;
+}
+
+.atendimento-option.is-selected {
+    background: rgba(119, 51, 59, 0.22);
+    box-shadow: 0 6px 18px rgba(119, 51, 59, 0.18);
+}
+
+.atendimento-option:disabled {
+    cursor: default;
+    opacity: 0.6;
+    transform: none;
+    box-shadow: none;
+}
+
+.atendimento-option.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.atendimento-footer {
+    padding: 0.8rem 1.2rem 1rem;
+    border-top: 1px solid rgba(230, 190, 138, 0.2);
+    font-size: 0.78rem;
+    color: rgba(119, 51, 59, 0.65);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.atendimento-footer-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.atendimento-footer-button {
+    border: none;
+    cursor: pointer;
+    padding: 0.45rem 0.8rem;
+    border-radius: 10px;
+    background: rgba(119, 51, 59, 0.12);
+    color: #77333b;
+    font-weight: 600;
+    font-size: 0.78rem;
+    transition: all 0.2s ease;
+}
+
+.atendimento-footer-button:hover {
+    background: rgba(119, 51, 59, 0.2);
+    transform: translateY(-1px);
+}
+
+.atendimento-footer-button:active {
+    transform: translateY(0);
+}
+
+.atendimento-footer-button:focus-visible {
+    outline: 2px solid rgba(119, 51, 59, 0.35);
+    outline-offset: 2px;
+}
+
+.atendimento-footer-button.is-secondary {
+    background: rgba(230, 190, 138, 0.18);
+    color: #5a2630;
+}
+
+body[data-theme="dark"] .atendimento-widget {
+    background: linear-gradient(135deg, rgba(20, 15, 17, 0.98) 0%, rgba(16, 11, 13, 0.98) 100%);
+    border-color: rgba(230, 190, 138, 0.25);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+
+body[data-theme="dark"] .atendimento-title {
+    color: #f0e7df;
+}
+
+body[data-theme="dark"] .atendimento-subtitle,
+body[data-theme="dark"] .atendimento-footer {
+    color: rgba(240, 231, 223, 0.7);
+}
+
+body[data-theme="dark"] .atendimento-bubble {
+    background: rgba(62, 92, 75, 0.35);
+    color: #f0e7df;
+}
+
+body[data-theme="dark"] .atendimento-bubble::after {
+    background: rgba(62, 92, 75, 0.35);
+}
+
+body[data-theme="dark"] .atendimento-bubble.user {
+    background: rgba(120, 160, 120, 0.35);
+    color: #f0e7df;
+}
+
+body[data-theme="dark"] .atendimento-bubble.user::after {
+    background: rgba(120, 160, 120, 0.35);
+}
+
+body[data-theme="dark"] .atendimento-avatar {
+    background: rgba(230, 190, 138, 0.15);
+    box-shadow: inset 0 0 0 2px rgba(230, 190, 138, 0.25);
+}
+
+body[data-theme="dark"] .atendimento-option {
+    background: rgba(230, 190, 138, 0.12);
+    color: #f0e7df;
+}
+
+body[data-theme="dark"] .atendimento-option:hover {
+    background: rgba(230, 190, 138, 0.22);
+}
+
+body[data-theme="dark"] .atendimento-close {
+    color: #f0e7df;
+}
+
+body[data-theme="dark"] .atendimento-footer-button {
+    background: rgba(230, 190, 138, 0.18);
+    color: #f0e7df;
+}
+
+body[data-theme="dark"] .atendimento-footer-button:hover {
+    background: rgba(230, 190, 138, 0.28);
+}
+
+body[data-theme="dark"] .atendimento-footer-button.is-secondary {
+    background: rgba(119, 51, 59, 0.28);
+    color: #f0e7df;
+}
+
+@media (max-width: 520px) {
+    .atendimento-widget {
+        right: 12px;
+        bottom: 12px;
+        width: calc(100% - 24px);
+        max-height: calc(100vh - 24px);
+    }
+
+    .atendimento-header {
+        padding: 0.9rem 1rem;
+    }
+
+    .atendimento-title {
+        font-size: 1.05rem;
+    }
+
+    .atendimento-subtitle {
+        font-size: 0.78rem;
+    }
+
+    .atendimento-avatar {
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+    }
+
+    .atendimento-body {
+        padding: 0.9rem 1rem 1.1rem;
+        gap: 0.8rem;
+    }
+
+    .atendimento-bubble {
+        font-size: 0.9rem;
+        padding: 0.8rem 0.9rem;
+        max-width: 100%;
+    }
+
+    .atendimento-options {
+        max-height: none;
+        overflow: visible;
+        padding-right: 0;
+    }
+
+    .atendimento-option {
+        font-size: 0.88rem;
+    }
+
+    .atendimento-footer {
+        padding: 0.7rem 1rem 0.9rem;
+    }
+
+    .atendimento-footer-actions {
+        width: 100%;
+    }
+
+    .atendimento-footer-button {
+        flex: 1 1 48%;
+        font-size: 0.75rem;
+        padding: 0.5rem 0.7rem;
+    }
+}
+
 

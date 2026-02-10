@@ -27,7 +27,7 @@ function getHeaderHTML(pageTitle = 'Bem-Vinda(o)') {
         </div>
 
         <div class="actions">
-          <div class="action-item">
+          <div class="action-item" id="btnAtendimento">
             <span><img src="./assets/icons/vector.png" alt="Atendimento"></span>
             <p>Atendimento</p>
           </div>
@@ -56,7 +56,7 @@ function getHeaderHTML(pageTitle = 'Bem-Vinda(o)') {
       <div class="drawer-content">
         <button class="drawer-close" id="drawerClose">✕</button>
         <div class="drawer-actions">
-          <div class="drawer-action-item">
+          <div class="drawer-action-item" id="btnAtendimentoDrawer">
             <span><img src="./assets/icons/vector.png" alt="Atendimento"></span>
             <p>Atendimento</p>
           </div>
@@ -114,7 +114,7 @@ function getHeaderHTMLForCatalog(pageTitle = 'Catálogo') {
         </div>
 
         <div class="actions">
-          <div class="action-item">
+          <div class="action-item" id="btnAtendimento">
             <span><img src="../../assets/icons/vector.png" alt="Atendimento"></span>
             <p>Atendimento</p>
           </div>
@@ -143,7 +143,7 @@ function getHeaderHTMLForCatalog(pageTitle = 'Catálogo') {
       <div class="drawer-content">
         <button class="drawer-close" id="drawerClose">✕</button>
         <div class="drawer-actions">
-          <div class="drawer-action-item">
+          <div class="drawer-action-item" id="btnAtendimentoDrawer">
             <span><img src="../../assets/icons/vector.png" alt="Atendimento"></span>
             <p>Atendimento</p>
           </div>
